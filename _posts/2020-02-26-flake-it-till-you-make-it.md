@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title: L2 | Unit 1 | The Online World
 cover-img: https://somersetdesign.co.uk/userfiles/blog/e_9.jpg
 thumbnail-img: /assets/img/thumb.png
