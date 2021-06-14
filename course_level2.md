@@ -1,8 +1,8 @@
 ---
 layout: page
 full-width: true
-title: Course | Level 2 Extended Certificate in Information & Creative Technology
-subtitle: 
+title: Course | Level 1/2
+subtitle: Extended Certificate in Information & Creative Technology
 ---
 
 {: .box-note}
