@@ -13,7 +13,6 @@ navbar-links:
     - Office 365: "https://www.office.com/"
     - PyCharm: "https://www.jetbrains.com/pycharm/"
     - VisualStudio: "https://visualstudio.microsoft.com/vs/"
-    - <hr>: "#"
     - UCAS: "https://www.ucas.com/"
     - Github Student: "https://education.github.com/"
     - UNiDAYS: "https://www.myunidays.com/GB/en-GB"

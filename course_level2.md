@@ -8,15 +8,15 @@ subtitle: Extended Certificate in Information & Creative Technology
 **Warning:** This page is still being written.
 
 {: .box-note}
-**Course Specification:** [Person Qualifications](https://qualifications.pearson.com/content/dam/pdf/BTEC-Firsts/Information-and-Creative-Technology/2012/Specification-and-sample-assessments/9781446936573_BTECFIRST_L12_CEC_ICT_Iss3.pdf)
+**Course Specification:** [Pearson Qualifications](https://qualifications.pearson.com/content/dam/pdf/BTEC-Firsts/Information-and-Creative-Technology/2012/Specification-and-sample-assessments/9781446936573_BTECFIRST_L12_CEC_ICT_Iss3.pdf)
 <br>**Course Tutor:** [Terry Prosser](staff_terryprosser)
 <br>**Course Summary:** This is a one year course consisting of 8 units delivered throughout the year.
 
 ## Course Description
 
 You will also benefit from an hour of tutorial and four hours of functional skills (Literacy and Numeracy) per week; note, if you have achieved grade D at GCSE in either English or Maths, you will be given the opportunity to study for and resit your GCSE in that subject rather than take Functional Skills.
-<br>There are 3 Core units that are designed to cover the body of content that employers and educators within the sector consider essential for 14–19 year old learners. Two of these core units are externally assessed by the exam board through 1 hour online examinations. Herefordshire & Ludlow College's policies and procedures for exams comply with the exam-board's external assessment process.
-<br>The specific aims of the course are to:
+<br><br>There are 3 Core units that are designed to cover the body of content that employers and educators within the sector consider essential for 14–19 year old learners. Two of these core units are externally assessed by the exam board through 1 hour online examinations. Herefordshire & Ludlow College's policies and procedures for exams comply with the exam-board's external assessment process.
+<br><br>The specific aims of the course are to:
  - Provide a comprehensive and challenging programme of study related to IT/computing that is particularly suited to post-16 learners who have the relevant interest and aptitude to progress in the sector
  - Provide a broad and balanced programme of study through the core, mandatory and optional units to develop knowledge, skills and understanding that are relevant to the sector as a whole
  - Provide opportunities for the development of transferable and employability skills related to study and vocational application that provide a platform for success both within IT/computing and elsewhere
@@ -35,4 +35,3 @@ You will also benefit from an hour of tutorial and four hours of functional skil
 | Unit 13: Website Development | [Specification](https://qualifications.pearson.com/content/dam/pdf/BTEC-Firsts/Information-and-Creative-Technology/2012/Specification-and-sample-assessments/9781446936573_BTECFIRST_L12_CEC_ICT_Iss3.pdf) | 1 | [Terry](staff_terryprosser) |
 | Unit 14: Installing Maintaining Hardware | [Specification](https://qualifications.pearson.com/content/dam/pdf/BTEC-Firsts/Information-and-Creative-Technology/2012/Specification-and-sample-assessments/9781446936573_BTECFIRST_L12_CEC_ICT_Iss3.pdf) | 1 | [Tom](staff_tomworgan) |
 | Unit 17: Multimedia Product Development | [Specification](https://qualifications.pearson.com/content/dam/pdf/BTEC-Firsts/Information-and-Creative-Technology/2012/Specification-and-sample-assessments/9781446936573_BTECFIRST_L12_CEC_ICT_Iss3.pdf) | 1 | [Lewis](staff_lewiscampbell) |
-
