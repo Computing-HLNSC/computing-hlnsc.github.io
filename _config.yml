@@ -6,9 +6,9 @@ author: Lewis Campbell
 navbar-links:
   Home: "index"
   Provided Courses:
-    - <strong>Level 2</strong><br>Extended Certificate<br>in<br>Information & Creative Technology: "level2"
-    - <strong>Level 3</strong><br>Extended Diploma<br>in<br>Computing: "level3"
-    - <strong>Level 4 & 5</strong><br>HND in<br>Computing & Systems Development: "level4"
+    - <strong>Level 2</strong><br>Extended Certificate<br>in<br>Information & Creative Technology: "course_level2"
+    - <strong>Level 3</strong><br>Extended Diploma<br>in<br>Computing: "course_level3"
+    - <strong>Level 4 & 5</strong><br>HND in<br>Computing & Systems Development: "course_level4"
   Resources:
     - Office 365: "https://www.office.com/"
     - PyCharm: "https://www.jetbrains.com/pycharm/"
@@ -18,10 +18,10 @@ navbar-links:
     - Github Student: "https://education.github.com/"
     - UNiDAYS: "https://www.myunidays.com/GB/en-GB"
   Lecturing Staff:
-    - Tom Worgan: "tomworgan"
-    - Lewis Campbell: "lewiscampbell"
-    - Phil Smith: "philsmith"
-    - Terry Prosser: "terryprosser"
+    - Tom Worgan: "staff_tomworgan"
+    - Lewis Campbell: "staff_lewiscampbell"
+    - Phil Smith: "staff_philsmith"
+    - Terry Prosser: "staff_terryprosser"
 
 # --- Logo --- #
 avatar: "/assets/img/avatar-icon.png"
