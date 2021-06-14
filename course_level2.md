@@ -9,7 +9,7 @@ subtitle: Extended Certificate in Information & Creative Technology
 
 {: .box-note}
 **Course Specification:** [Person Qualifications](https://qualifications.pearson.com/content/dam/pdf/BTEC-Firsts/Information-and-Creative-Technology/2012/Specification-and-sample-assessments/9781446936573_BTECFIRST_L12_CEC_ICT_Iss3.pdf)
-**Course Tutor:** [Terry Prosser](staff_terryprosser)
+<br>**Course Tutor:** [Terry Prosser](staff_terryprosser)
 
 ## Course Units
 
