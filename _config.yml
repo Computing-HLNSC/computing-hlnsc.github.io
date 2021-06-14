@@ -6,7 +6,7 @@ author: Lewis Campbell
 navbar-links:
   Home: "index"
   Provided Courses:
-    - Level 2 Extended Certificate in Information and Creative Technology: "level2"
+    - <strong>Level 2</strong> Extended Certificate<br> in Information and Creative Technology: "level2"
     - Level 3 Extended Diploma in Computing: "level3"
   Resources:
     - Office 365: "https://www.office.com/"
