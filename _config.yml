@@ -8,9 +8,15 @@ navbar-links:
   Provided Courses:
     - <strong>Level 2</strong><br>Extended Certificate<br>in<br>Information & Creative Technology: "level2"
     - <strong>Level 3</strong><br>Extended Diploma<br>in<br>Computing: "level3"
-    - <strong>Level 4 & 5</strong><br>HND<br>in<br>Computing & Systems Development: "level4"
+    - <strong>Level 4 & 5</strong><br>HND in<br>Computing & Systems Development: "level4"
   Resources:
     - Office 365: "https://www.office.com/"
+    - PyCharm: "https://www.jetbrains.com/pycharm/"
+    - VisualStudio: "https://visualstudio.microsoft.com/vs/"
+    - <hr>: "#"
+    - UCAS: "https://www.ucas.com/"
+    - Github Student: "https://education.github.com/"
+    - UNiDAYS: "https://www.myunidays.com/GB/en-GB"
   Lecturing Staff:
     - Tom Worgan: "tomworgan"
     - Lewis Campbell: "lewiscampbell"
