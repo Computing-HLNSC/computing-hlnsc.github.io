@@ -8,6 +8,8 @@ navbar-links:
   Provided Courses:
     - Level 2 Extended Certificate in Information and Creative Technology: "level2"
     - Level 3 Extended Diploma in Computing: "level3"
+  Resources:
+    - Office 365: "https://www.office.com/"
   Lecturing Staff:
     - Tom Worgan: "tomworgan"
     - Lewis Campbell: "lewiscampbell"
