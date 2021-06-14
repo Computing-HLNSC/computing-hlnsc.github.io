@@ -5,9 +5,9 @@ author: Lewis Campbell
 
 navbar-links:
   Home: "index"
-  Courses:
-    - Level 1/Level 2 Extended Certificate in Information and Creative Technology: "level2"
-    - Level 3 National Extended Diploma in Computing: "level3"
+  Provided Courses:
+    - Level 2 Extended Certificate in Information and Creative Technology: "level2"
+    - Level 3 Extended Diploma in Computing: "level3"
   Lecturing Staff:
     - Tom Worgan: "tomworgan"
     - Lewis Campbell: "lewiscampbell"
@@ -16,8 +16,6 @@ navbar-links:
 
 # --- Logo --- #
 avatar: "/assets/img/avatar-icon.png"
-
-# By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
 
 # If you want to have an image logo in the top-left corner instead of having the title of the website,
@@ -26,7 +24,6 @@ round-avatar: true
 
 
 # --- Footer social media links --- #
-
 # Select the social network links that you want to show in the footer.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
@@ -84,7 +81,7 @@ feed_show_tags: false
 post_search: true
 
 # The keywords to associate with your website, for SEO purposes
-#keywords: "my,list,of,keywords"
+keywords: "computing,btec,hereford,sixyhform,college,further,education,higher,"
 
 # --- Colours / background image --- #
 
