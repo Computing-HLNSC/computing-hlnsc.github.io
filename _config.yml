@@ -6,9 +6,9 @@ author: Lewis Campbell
 navbar-links:
   Home: "index"
   Provided Courses:
-    - <strong>Level 2</strong><br>Extended Certificate<br>in<br>Information and Creative Technology: "level2"
+    - <strong>Level 2</strong><br>Extended Certificate<br>in<br>Information & Creative Technology: "level2"
     - <strong>Level 3</strong><br>Extended Diploma<br>in<br>Computing: "level3"
-    - <strong>Level 4/5</strong><br>Higher National Diploma<br>in<br>Computing & Systems Development: "level4"
+    - <strong>Level 4 & 5</strong><br>HND<br>in<br>Computing & Systems Development: "level4"
   Resources:
     - Office 365: "https://www.office.com/"
   Lecturing Staff:
