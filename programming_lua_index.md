@@ -15,15 +15,17 @@ subtitle: Information and examples for LUA 5.3 & 5.4
 ## Description
 This page assumes at least basic knowledge of programming/scripting. For fundamentals and principles of computer science, programming and scripting please refer to lecture handouts.
 
-## Course Units
+## Content Table
 
-| Content | Sub-Content | State |
+| Content | Content Description | State |
 | :------ |:--- | :--- | :--- |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
-| Variables | | Unwritten |
+| Variables - Defining | | Unwritten |
+| Variables - Managing | | Unwritten |
+| Operators - Logical | | Unwritten |
+| Operators - Relational | | Unwritten |
+| Operators - Arithmetic | | Unwritten |
+| Loops | | Unwritten |
+| Boolean Expression | | Unwritten |
+| Functions | | Unwritten |
+
+
