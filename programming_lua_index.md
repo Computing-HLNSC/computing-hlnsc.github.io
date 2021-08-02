@@ -1,7 +1,7 @@
 ---
 layout: page
 full-width: true
-title: Language Information | LUA
+title: Information | LUA
 subtitle: Information and examples for LUA 5.3 & 5.4
 ---
 {: .box-warning}
