@@ -24,8 +24,9 @@ This page assumes at least basic knowledge of programming/scripting. For fundame
 | Operators - Logical | | Unwritten |
 | Operators - Relational | | Unwritten |
 | Operators - Arithmetic | | Unwritten |
-| Loops | | Unwritten |
-| Boolean Expression | | Unwritten |
-| Functions | | Unwritten |
-
-
+| Control Structures - Branches | | Unwritten |
+| Control Structures - Loops | | Unwritten |
+| Control Structures - Defining Functions | | Unwritten |
+| Control Structures - Calling Functions | | Unwritten |
+| Data Structures - Tables | | Unwritten |
+| Advanced - Modules & Objects | | Unwritten |
