@@ -22,24 +22,24 @@
 	</header>
 
 	<!-- Floating Buttons -->
-	<div class="fixed right-5 bottom-5 flex flex-col space-y-3 z-50">
-	  <!-- Contact Button -->
-	  <button id="contactBtn"
-			  class="bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white p-3 rounded-full shadow-lg">
-		📞
-	  </button>
+	<div class="fixed right-5 bottom-5 flex flex-col items-center space-y-3 z-50">
+		<!-- Contact Button -->
+		<button id="contactBtn"
+			class="w-14 h-14 flex items-center justify-center bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white rounded-full shadow-lg transition">
+			<span style="font-size:200%;">✆</span>
+		</button>
 
-	  <!-- Info Button -->
-	  <button id="infoBtn"
-			  class="bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white p-3 rounded-full shadow-lg">
-		i
-	  </button>
+		<!-- Info Button -->
+		<button id="infoBtn"
+			class="w-14 h-14 flex items-center justify-center bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white rounded-full shadow-lg transition">
+			<span style="font-size:200%;">🛈</span>
+		</button>
 
-	  <!-- Extra Button -->
-	  <button id="blankBtn"
-			  class="bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg" hidden=true>
-		◯
-	  </button>
+		<!-- Extra Button (Turnitin Example) -->
+		<button onclick="window.open('https://turnitinuk.com/', '_blank')"
+			class="w-14 h-14 flex items-center justify-center bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse rounded-full shadow-lg transition">
+			<img src="./turnitinuk-logo.png" alt="Turnitin" class="w-7 h-7 object-contain">
+		</button>
 	</div>
 
 	<!-- Floating Modal -->
@@ -107,7 +107,7 @@
 				<!-- Practical Content -->
 				<div id="practical" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Network Rack Setup" class="w-full h-32 object-cover rounded mb-4">
+						<img src="osint.png" alt="OSINT" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Open Sourced Intelligence (OSINT)</h3>
 						<p class="text-sm text-gray-700 mb-2">Setting up and using open sourced intelligence tools (osint).</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -115,7 +115,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Denial of Service Attacks (DOS / DDOS)</h3>
 						<p class="text-sm text-gray-700 mb-2">Setting up a simulated denial of service attack.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -123,7 +123,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">SQL Injection Attack</h3>
 						<p class="text-sm text-gray-700 mb-2">Setting up an SQL injection attack.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -131,7 +131,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="networking.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Network Rack</h3>
 						<p class="text-sm text-gray-700 mb-2">Setting up and configuring a network rack with associated equipment.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -139,7 +139,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Endpoint Security & Protection</h3>
 						<p class="text-sm text-gray-700 mb-2">Setting up and configuring a effective endpoint security.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -147,7 +147,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Phone & Line Wiretapping</h3>
 						<p class="text-sm text-gray-700 mb-2">Setting up an effective wiretap between 2 or more IP phones.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -155,7 +155,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Encryption and Cracking</h3>
 						<p class="text-sm text-gray-700 mb-2">Looking at encrpypting files and data. Breaking encrpytion to access files and data.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -163,7 +163,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Files, Metadata and Hashing</h3>
 						<p class="text-sm text-gray-700 mb-2">Looking at file composition, looking at meta data and file hashing.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -171,7 +171,7 @@
 						</div>
 					</div>
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<img src="x.png" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Kali Linux Installation</h3>
 						<p class="text-sm text-gray-700 mb-2">Looking at the installation of the Linux distrobution Kali.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -183,7 +183,7 @@
 				<!-- Academic Content -->
 				<div id="academic" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="academic_study_skills.jpg" alt="Study Skills" class="w-full h-32 object-cover rounded mb-4">
+						<img src="academic_study_skills.jpg" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Submitting Assignments (TurnItInUK)</h3>
 						<p class="text-sm text-gray-700 mb-2">Guidance on submitting assignments to TurnItInUK.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -192,7 +192,7 @@
 					</div>
 
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="referencing.jpg" alt="Referencing Guide" class="w-full h-32 object-cover rounded mb-4">
+						<img src="referencing.jpg" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Referencing and Academic Integrity</h3>
 						<p class="text-sm text-gray-700 mb-2">Guidance on referencing and information on academic integrity.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -201,7 +201,7 @@
 					</div>
 					
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="referencing.jpg" alt="Referencing Guide" class="w-full h-32 object-cover rounded mb-4">
+						<img src="referencing.jpg" alt="" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Professional Conduct</h3>
 						<p class="text-sm text-gray-700 mb-2">Information on work placements, work experience and getting into the workplace.</p>
 						<div class="flex justify-between text-sm text-gray-500">
@@ -688,7 +688,6 @@
 		});
 		const contactBtn = document.getElementById('contactBtn');
 		const infoBtn = document.getElementById('infoBtn');
-		const blankBtn = document.getElementById('blankBtn');
 		const modal = document.getElementById('floatingModal');
 		const modalContent = document.getElementById('modalContent');
 		const closeModal = document.getElementById('closeModal');
@@ -706,15 +705,6 @@
 		// Open Info modal
 		infoBtn.addEventListener('click', () => {
 		modalContent.innerHTML = aboutSection.innerHTML;
-		modal.classList.remove('hidden');
-		});
-
-		// Blank button (ready for future feature)
-		blankBtn.addEventListener('click', () => {
-		modalContent.innerHTML = `
-		  <h2 class="text-xl font-bold mb-2">Coming Soon</h2>
-		  <p>This section is under development. Stay tuned!</p>
-		`;
 		modal.classList.remove('hidden');
 		});
 
