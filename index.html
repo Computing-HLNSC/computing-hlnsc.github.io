@@ -7,6 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-[#0D3B66] font-sans">
+	<!-- Header -->
 	<header class="bg-[#0D3B66] text-white py-4">
 		<div class="container mx-auto px-4 flex items-center justify-between">
 			<div class="flex items-center cursor-pointer" onclick="window.location.href='https://hlnsc.ac.uk/'">
@@ -20,7 +21,38 @@
 		</div>
 	</header>
 
-    <section class="py-3">
+	<!-- Floating Buttons -->
+	<div class="fixed right-5 bottom-5 flex flex-col space-y-3 z-50">
+	  <!-- Contact Button -->
+	  <button id="contactBtn"
+			  class="bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white p-3 rounded-full shadow-lg">
+		📞
+	  </button>
+
+	  <!-- Info Button -->
+	  <button id="infoBtn"
+			  class="bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white p-3 rounded-full shadow-lg">
+		i
+	  </button>
+
+	  <!-- Extra Button -->
+	  <button id="blankBtn"
+			  class="bg-gray-600 hover:bg-gray-700 text-white p-3 rounded-full shadow-lg" hidden=true>
+		◯
+	  </button>
+	</div>
+
+	<!-- Floating Modal -->
+	<div id="floatingModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+	  <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 max-h-[80vh] overflow-y-auto relative">
+		<button id="closeModal"
+				class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl font-bold">&times;</button>
+		<div id="modalContent" class="p-6"></div>
+	  </div>
+	</div>
+
+	<!-- Contact Section -->
+    <section class="py-3" hidden=True>
         <div class="container mx-auto px-4">
             <div class="bg-white shadow-lg rounded-lg p-6">
                 <div class="md:flex md:items-center">
@@ -43,8 +75,9 @@
             </div>
         </div>
     </section>
-
-    <section>
+	
+	<!-- About Us -->
+	<section hidden=True>
         <div class="container mx-auto px-4">
             <div class="bg-white shadow-lg rounded-lg p-6">
                 <h2 class="text-xl font-bold mb-4">About Us</h2>
@@ -54,8 +87,8 @@
             </div>
         </div>
     </section>
-
-    
+	
+	<!-- Page Content -->
 	<section class="py-3">
 		<div class="container mx-auto px-4">
 			<div class="bg-white shadow-lg rounded-lg p-6">
@@ -71,55 +104,113 @@
 						data-tab="cisco">Cisco Self Study Courses</button>
 				</div>
 
-				<!-- Tab Content -->
+				<!-- Practical Content -->
 				<div id="practical" class="tab-content grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="network_rack_setup.jpg" alt="Network Rack Setup" class="w-full h-32 object-cover rounded mb-4">
-						<h3 class="text-lg font-bold">Setting Up a Network Rack</h3>
-						<p class="text-sm text-gray-700 mb-2">Learn the step-by-step process of configuring physical networking environments safely and effectively.</p>
+						<img src="cyber_security.png" alt="Network Rack Setup" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Open Sourced Intelligence (OSINT)</h3>
+						<p class="text-sm text-gray-700 mb-2">Setting up and using open sourced intelligence tools (osint).</p>
 						<div class="flex justify-between text-sm text-gray-500">
-							<span>🎓: Intermediate</span>
-							<span>👷: Practical Skills</span>
-							<span>🕑: 3 Hours</span>
+							<span>👤: Cyber Security</span>
 						</div>
 					</div>
-
 					<div class="bg-gray-50 shadow rounded-lg p-4">
-						<img src="cable_crimping.jpg" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
-						<h3 class="text-lg font-bold">Cable Crimping and Testing</h3>
-						<p class="text-sm text-gray-700 mb-2">Master RJ45 cable making and network cable testing — essential hands-on skills for networking technicians.</p>
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Denial of Service Attacks (DOS / DDOS)</h3>
+						<p class="text-sm text-gray-700 mb-2">Setting up a simulated denial of service attack.</p>
 						<div class="flex justify-between text-sm text-gray-500">
-							<span>🎓: Beginner</span>
-							<span>👷: Networking</span>
-							<span>🕑: 2 Hours</span>
+							<span>👤: Cyber Security</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">SQL Injection Attack</h3>
+						<p class="text-sm text-gray-700 mb-2">Setting up an SQL injection attack.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Cyber Security</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="networking.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Network Rack</h3>
+						<p class="text-sm text-gray-700 mb-2">Setting up and configuring a network rack with associated equipment.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Networking</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Endpoint Security & Protection</h3>
+						<p class="text-sm text-gray-700 mb-2">Setting up and configuring a effective endpoint security.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Cyber Security</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Phone & Line Wiretapping</h3>
+						<p class="text-sm text-gray-700 mb-2">Setting up an effective wiretap between 2 or more IP phones.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Cyber Security & Networking</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Encryption and Cracking</h3>
+						<p class="text-sm text-gray-700 mb-2">Looking at encrpypting files and data. Breaking encrpytion to access files and data.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Cyber Security</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Files, Metadata and Hashing</h3>
+						<p class="text-sm text-gray-700 mb-2">Looking at file composition, looking at meta data and file hashing.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Cyber Security & IT</span>
+						</div>
+					</div>
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="cyber_security.png" alt="Cable Crimping" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Kali Linux Installation</h3>
+						<p class="text-sm text-gray-700 mb-2">Looking at the installation of the Linux distrobution Kali.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>👤: Cyber Security & IT</span>
 						</div>
 					</div>
 				</div>
-
+				
+				<!-- Academic Content -->
 				<div id="academic" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					<div class="bg-gray-50 shadow rounded-lg p-4">
 						<img src="academic_study_skills.jpg" alt="Study Skills" class="w-full h-32 object-cover rounded mb-4">
-						<h3 class="text-lg font-bold">Effective Study Skills</h3>
-						<p class="text-sm text-gray-700 mb-2">Improve academic performance with proven study techniques, note-taking, and time management methods.</p>
+						<h3 class="text-lg font-bold">Submitting Assignments (TurnItInUK)</h3>
+						<p class="text-sm text-gray-700 mb-2">Guidance on submitting assignments to TurnItInUK.</p>
 						<div class="flex justify-between text-sm text-gray-500">
-							<span>🎓: All Levels</span>
-							<span>📚: Academic Support</span>
-							<span>🕑: 1.5 Hours</span>
+							<span>📚: Academic</span>
 						</div>
 					</div>
 
 					<div class="bg-gray-50 shadow rounded-lg p-4">
 						<img src="referencing.jpg" alt="Referencing Guide" class="w-full h-32 object-cover rounded mb-4">
 						<h3 class="text-lg font-bold">Referencing and Academic Integrity</h3>
-						<p class="text-sm text-gray-700 mb-2">Learn to reference correctly and understand plagiarism to maintain academic honesty in assignments.</p>
+						<p class="text-sm text-gray-700 mb-2">Guidance on referencing and information on academic integrity.</p>
 						<div class="flex justify-between text-sm text-gray-500">
-							<span>🎓: College</span>
-							<span>📚: Academic Writing</span>
-							<span>🕑: 1 Hour</span>
+							<span>📚: Academic</span>
+						</div>
+					</div>
+					
+					<div class="bg-gray-50 shadow rounded-lg p-4">
+						<img src="referencing.jpg" alt="Referencing Guide" class="w-full h-32 object-cover rounded mb-4">
+						<h3 class="text-lg font-bold">Professional Conduct</h3>
+						<p class="text-sm text-gray-700 mb-2">Information on work placements, work experience and getting into the workplace.</p>
+						<div class="flex justify-between text-sm text-gray-500">
+							<span>📚: Academic</span>
 						</div>
 					</div>
 				</div>
 
+				<!-- Cisco Content -->
 				<div id="cisco" class="tab-content hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 					<!-- Cyber Security -->
 					<a href="https://www.netacad.com/courses/introduction-to-cybersecurity?courseLang=en-US&instance_id=4cd1dc43-229a-453f-9cae-5cc9de1ac085" target="_blank" class="block">
@@ -579,6 +670,7 @@
 			</div>
 		</div>
 	</section>
+
 	<script>
 		const tabs = document.querySelectorAll('.tab-btn');
 		const contents = document.querySelectorAll('.tab-content');
@@ -594,6 +686,45 @@
 				});
 			});
 		});
+		const contactBtn = document.getElementById('contactBtn');
+		const infoBtn = document.getElementById('infoBtn');
+		const blankBtn = document.getElementById('blankBtn');
+		const modal = document.getElementById('floatingModal');
+		const modalContent = document.getElementById('modalContent');
+		const closeModal = document.getElementById('closeModal');
+
+		// Store content references
+		const contactSection = document.querySelector('section:nth-of-type(1)'); // Contact section
+		const aboutSection = document.querySelector('section:nth-of-type(2)');   // About Us section
+
+		// Open Contact modal
+		contactBtn.addEventListener('click', () => {
+		modalContent.innerHTML = contactSection.innerHTML;
+		modal.classList.remove('hidden');
+		});
+
+		// Open Info modal
+		infoBtn.addEventListener('click', () => {
+		modalContent.innerHTML = aboutSection.innerHTML;
+		modal.classList.remove('hidden');
+		});
+
+		// Blank button (ready for future feature)
+		blankBtn.addEventListener('click', () => {
+		modalContent.innerHTML = `
+		  <h2 class="text-xl font-bold mb-2">Coming Soon</h2>
+		  <p>This section is under development. Stay tuned!</p>
+		`;
+		modal.classList.remove('hidden');
+		});
+
+		// Close modal
+		closeModal.addEventListener('click', () => modal.classList.add('hidden'));
+
+		// Close when clicking outside the modal box
+		modal.addEventListener('click', (e) => {
+		if (e.target === modal) modal.classList.add('hidden');
+		});	
 	</script>
 </body>
 </html>
