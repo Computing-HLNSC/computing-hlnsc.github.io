@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computing Department | Cisco Networking Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<style>
+	  /* Tooltip container */
+	  .tooltip {
+		position: relative;
+		cursor: help;
+		border-bottom: 2px dotted #2563eb; /* Tailwind's blue-600 */
+	  }
+
+	  /* Tooltip text */
+	  .tooltip::after {
+		content: attr(data-tip);
+		position: absolute;
+		bottom: 125%; /* show above the text */
+		left: 50%;
+		transform: translateX(-50%);
+		background-color: rgba(17, 24, 39, 0.9); /* Tailwind gray-900 */
+		color: #fff;
+		padding: 0.5rem 0.75rem;
+		border-radius: 0.375rem; /* rounded-md */
+		white-space: nowrap;
+		opacity: 0;
+		pointer-events: none;
+		transition: opacity 0.2s ease-in-out;
+		font-size: 0.875rem; /* text-sm */
+		z-index: 50;
+	  }
+
+	  /* Small arrow under the tooltip */
+	  .tooltip::before {
+		content: "";
+		position: absolute;
+		bottom: 115%;
+		left: 50%;
+		transform: translateX(-50%);
+		border-width: 5px;
+		border-style: solid;
+		border-color: rgba(17, 24, 39, 0.9) transparent transparent transparent;
+		opacity: 0;
+		transition: opacity 0.2s ease-in-out;
+		z-index: 50;
+	  }
+
+	  /* Hover/focus states */
+	  .tooltip:hover::after,
+	  .tooltip:hover::before,
+	  .tooltip:focus::after,
+	  .tooltip:focus::before {
+		opacity: 1;
+	  }
+	</style>
+</head>
+<body class="bg-[#0D3B66] font-sans">
+	<header class="bg-[#0D3B66] text-white py-4">
+		<div class="container mx-auto px-4 flex items-center justify-between">
+			<div class="flex items-center cursor-pointer" onclick="window.location.href='https://hlnsc.ac.uk/'">
+				<img src="https://hlnsc.ac.uk/wp-content/uploads/2023/03/hlnsc-main-logo-white-text.png" alt="HLNSC Logo" class="h-12 mr-4">
+				<div>
+					<h1 class="text-2xl font-bold">Cisco Networking Academy</h1>
+					<p>Part of the Herefordshire College Computing Department</p>
+				</div>
+			</div>
+			<img src="../logoNetAcad-White.png" alt="Cisco Networking Academy Logo" class="h-12">
+		</div>
+	</header>
+
+	<section class="py-3">
+		<div class="container mx-auto px-4">
+			<div class="bg-white shadow-lg rounded-lg p-6">
+				<h2 class="text-l font-bold mb-4 p-2">
+					<a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+					<a class="bg-gray-200 p-2">HyperV</a>
+				</h2>
+				<hr><br>
+					<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+					  <!-- View toggle -->
+					  <div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
+						<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
+						<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
+					  </div>
+
+					  <!-- Single-step controls -->
+					  <div id="singleControls" class="hidden items-center gap-2">
+						<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 3</span>
+						<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
+						<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
+					  </div>
+					</div>
+				<div id="stepsWrapper" class="space-y-8">
+				<!-- START OF GUIDE -->
+				  
+				  
+				<!-- Step which has full width media -->
+				<!--
+				  <article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+					<h3 class="text-xl font-semibold mb-2">Step 1: Identify Your Objective</h3>
+					<p class="text-gray-700 mb-4">
+					  Begin by defining what you want to achieve. This step sets the focus for the rest of the process.
+					</p>
+					<div class="bg-gray-100 border rounded-lg p-3 mb-4">
+					  <iframe class="w-full h-64 rounded-lg"
+						src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+						title="Example Video" allowfullscreen></iframe>
+					</div>
+					<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+					  <h4 class="font-bold text-yellow-700 mb-1">💡 Tips</h4>
+					  <p class="text-yellow-800 text-sm">Keep your goal realistic and measurable before proceeding.</p>
+					</div>
+				  </article>
+				-->
+				
+				<!-- Step which has half width media -->
+				<!--
+				<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+				  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+					
+					<div>
+					  <h3 class="text-xl font-semibold mb-2">Step 1: Identify Your Objective</h3>
+					  <p class="text-gray-700 mb-4">
+						Begin by defining what you want to achieve. This step sets the focus for the rest of the process.
+					  </p>
+
+					  <div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+						<h4 class="font-bold text-yellow-700 mb-1">💡 Tips</h4>
+						<p class="text-yellow-800 text-sm">Keep your goal realistic and measurable before proceeding.</p>
+					  </div>
+					</div>
+
+					<div class="bg-gray-100 border rounded-lg p-3">
+					  <iframe
+						class="w-full h-64 lg:h-72 rounded-lg"
+						src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+						title="Example Video"
+						allowfullscreen>
+					  </iframe>
+					</div>
+
+				  </div>
+				</article>
+				-->
+					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+							<div>
+								<h3 class="text-xl font-semibold mb-2">Step 1: Step  Title Goes Here</h3>
+								<p class="text-gray-700">
+									A bit of information and description of the step. 
+									<span class="tooltip" data-tip="Open Source Intelligence">OSINT</span>
+									guide.
+								</p>
+
+								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+									<h4 class="font-bold text-yellow-700 mb-1">Tip</h4>
+									<p class="text-yellow-800 text-sm">Keep your goal realistic and measurable before proceeding.</p>
+								</div>
+							</div>
+
+							<div class="bg-gray-100 border rounded-lg p-3">
+								<iframe
+									class="w-full h-64 lg:h-72 rounded-lg"
+									src="https://www.youtube.com/embed/yg8eA4vicXU"
+									title="OSINT Explainer Video"
+									allowfullscreen>
+								</iframe>
+							</div>
+
+						</div>
+					</article>
+
+
+				<!-- END OF GUIDE -->
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+	<script>
+	  (function () {
+		const steps = Array.from(document.querySelectorAll('#stepsWrapper [data-step]'));
+		const total = steps.length;
+
+		const viewAllBtn = document.getElementById('viewAllBtn');
+		const viewSingleBtn = document.getElementById('viewSingleBtn');
+		const singleControls = document.getElementById('singleControls');
+		const stepCounter = document.getElementById('stepCounter');
+		const prevStep = document.getElementById('prevStep');
+		const nextStep = document.getElementById('nextStep');
+
+		let singleMode = false;
+		let idx = 0; // 0-based index for current step
+
+		function stopMedia(el) {
+		  // Reset <iframe> src to stop playback when hidden
+		  el.querySelectorAll('iframe').forEach(f => {
+			const src = f.getAttribute('src');
+			f.setAttribute('src', src);
+		  });
+		  // For <video> elements, pause
+		  el.querySelectorAll('video').forEach(v => v.pause());
+		}
+
+		function render() {
+		  if (!singleMode) {
+			steps.forEach(s => {
+			  s.classList.remove('hidden');
+			  s.setAttribute('aria-expanded', 'true');
+			});
+			singleControls.classList.add('hidden');
+			viewAllBtn.classList.add('bg-gray-100');
+			viewSingleBtn.classList.remove('bg-gray-100');
+			return;
+		  }
+
+		  steps.forEach((s, i) => {
+			if (i === idx) {
+			  s.classList.remove('hidden');
+			  s.setAttribute('aria-expanded', 'true');
+			} else {
+			  // stop media before hiding
+			  stopMedia(s);
+			  s.classList.add('hidden');
+			  s.setAttribute('aria-expanded', 'false');
+			}
+		  });
+
+		  singleControls.classList.remove('hidden');
+		  stepCounter.textContent = `Step ${idx + 1} of ${total}`;
+		  viewAllBtn.classList.remove('bg-gray-100');
+		  viewSingleBtn.classList.add('bg-gray-100');
+		}
+
+		// Toggle handlers
+		viewAllBtn.addEventListener('click', () => {
+		  singleMode = false;
+		  render();
+		});
+
+		viewSingleBtn.addEventListener('click', () => {
+		  singleMode = true;
+		  idx = Math.min(idx, total - 1);
+		  render();
+		});
+
+		// Navigation
+		prevStep.addEventListener('click', () => {
+		  idx = (idx - 1 + total) % total;
+		  render();
+		});
+
+		nextStep.addEventListener('click', () => {
+		  idx = (idx + 1) % total;
+		  render();
+		});
+
+		// Initial state: list view
+		render();
+	  })();
+	</script>
+</html>
