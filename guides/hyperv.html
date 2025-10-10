@@ -103,8 +103,7 @@
 				<div id="chapters" class="">
 					<!-- Chapter 1: Creating a VM -->
 					<section class="chapter" id="create-vm" data-chapter="create-vm">
-						<h2 class="text-2xl font-bold mb-3">Chapter: Creating a virtual machine</h2>
-						<div id="stepsWrapper-create-vm" class="space-y-8">
+						<div id="stepsWrapper-create-vm" class="">
 							<!-- Chapter Steps Start -->
 							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -371,56 +370,55 @@
 					</section>
 					<!-- Chapter 2: Installing an operating system -->
 					<section class="chapter hidden" id="install-os" data-chapter="install-os">
-						<h2 class="text-2xl font-bold mb-3">Chapter: Installing an operating system</h2>
-						<div id="stepsWrapper-install-os" class="space-y-8">
+						<div id="stepsWrapper-install-os" class="">
 
 							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
-										<h3 class="text-xl font-semibold mb-2">Step 1: Selecting your operating system</h3>
+										<h3 class="text-xl font-semibold mb-2">Step 1: Accessing settings</h3>
 										<p class="text-gray-700">
-											1. 
+											1. Right click the virtual machine you wish to install the operating system on.
 										</p><br>
 										<p class="text-gray-700">
-											2. Select Programs, then Programs and Features.
+											2. Select `Settings...`.
 										</p><br>
 										<p class="text-gray-700">
-											3. Select Turn Windows Features on or off.<br>
+											3. Navigate to the `SCSI Controller` tab.
 										</p><br>
-										<p class="text-gray-700">
-											4. Select Hyper-V and then select OK.
-										</p><br>
-										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-											<p class="text-yellow-800 text-sm">
-												You only need to complete this step if Hyper-V Manager is not present on your local machine/computer.
-											</p>
-										</div><br>
-										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
-											<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
-											<p class="text-red-800 text-sm">HyperV is a feature which is only available on Pro, Enterprise, and Education versions of Windows.
-												<br><br><b>Full System Requirements (Minimum)</b><br>
-												• Windows 10/11 (Pro, Enterprise or Education).<br>
-												• 64-bit Processor with Second Level Address Translation.<br>
-												• CPU support for VM Monitor Mode Extension.<br>
-												• Minimum of 4-GB memory.
-											</p>
-										</div>
 									</div>
 
 									<div class="bg-gray-100 border rounded-lg p-3">
-										<img src="./images/hyperv/step 1.png">
+										<img src="./images/hyperv/step 11.png">
+										<img src="./images/hyperv/step 12.png">
 									</div>
-
 								</div>
 							</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 2: Adding a DVD drive</h3>
+										<p class="text-gray-700">
+											1. You want to select DVD Drive.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Add`.
+										</p><br>
+										<p class="text-gray-700">
+											3. Navigate to the `DVD Drive` under the `SCSI Controller` tab.
+										</p><br>
+									</div>
 
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 12.png">
+										<img src="./images/hyperv/step 13.png">
+									</div>
+								</div>
+							</article>
 						</div>
 					</section>
 					<!-- Chapter 3: Networking on Hyper-V -->
 					<section class="chapter hidden" id="networking" data-chapter="networking">
-						<h2 class="text-2xl font-bold mb-3">Chapter: Networking on Hyper-V</h2>
-						<div id="stepsWrapper-networking" class="space-y-8">
+						<div id="stepsWrapper-networking" class="">
 							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
@@ -441,8 +439,7 @@
 					</section>
 					<!-- Chapter 4: Deleting a virtual machine -->
 					<section class="chapter hidden" id="delete-vm" data-chapter="delete-vm">
-						<h2 class="text-2xl font-bold mb-3">Chapter: Deleting a virtual machine</h2>
-						<div id="stepsWrapper-delete-vm" class="space-y-8">
+						<div id="stepsWrapper-delete-vm" class="">
 							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
@@ -476,16 +473,21 @@
 	function setActiveChapter(id, pushHash = true) {
 		chapters.forEach(ch => ch.classList.toggle('hidden', ch.id !== id));
 		chapterLinks.forEach(a => {
-			const active = a.getAttribute('data-chapter-link') === id;
+		const active = a.getAttribute('data-chapter-link') === id;
 			a.classList.toggle('bg-blue-50', active);
 			a.classList.toggle('border-blue-500', active);
 			a.classList.toggle('text-blue-700', active);
 		});
 		localStorage.setItem('hypervChapter', id);
 		if (pushHash) location.hash = id;
+
+		// Scroll to top smoothly when changing chapter
+		window.scrollTo(0,0);
+
 		// Re-scope steps to the newly active chapter
 		initStepsForCurrentChapter();
 	}
+
 
 	chapterLinks.forEach(a => {
 		a.addEventListener('click', (e) => {
