@@ -365,86 +365,86 @@
 	</section>
 </body>
 
-	<script>
-	  (function () {
-		const steps = Array.from(document.querySelectorAll('#stepsWrapper [data-step]'));
-		const total = steps.length;
+<script>
+	(function () {
+	const steps = Array.from(document.querySelectorAll('#stepsWrapper [data-step]'));
+	const total = steps.length;
 
-		const viewAllBtn = document.getElementById('viewAllBtn');
-		const viewSingleBtn = document.getElementById('viewSingleBtn');
-		const singleControls = document.getElementById('singleControls');
-		const stepCounter = document.getElementById('stepCounter');
-		const prevStep = document.getElementById('prevStep');
-		const nextStep = document.getElementById('nextStep');
+	const viewAllBtn = document.getElementById('viewAllBtn');
+	const viewSingleBtn = document.getElementById('viewSingleBtn');
+	const singleControls = document.getElementById('singleControls');
+	const stepCounter = document.getElementById('stepCounter');
+	const prevStep = document.getElementById('prevStep');
+	const nextStep = document.getElementById('nextStep');
 
-		let singleMode = true;
-		let idx = 0; // 0-based index for current step
+	let singleMode = true;
+	let idx = 0; // 0-based index for current step
 
-		function stopMedia(el) {
-		  // Reset <iframe> src to stop playback when hidden
-		  el.querySelectorAll('iframe').forEach(f => {
-			const src = f.getAttribute('src');
-			f.setAttribute('src', src);
-		  });
-		  // For <video> elements, pause
-		  el.querySelectorAll('video').forEach(v => v.pause());
+	function stopMedia(el) {
+		// Reset <iframe> src to stop playback when hidden
+		el.querySelectorAll('iframe').forEach(f => {
+		const src = f.getAttribute('src');
+		f.setAttribute('src', src);
+		});
+		// For <video> elements, pause
+		el.querySelectorAll('video').forEach(v => v.pause());
+	}
+
+	function render() {
+		if (!singleMode) {
+		steps.forEach(s => {
+			s.classList.remove('hidden');
+			s.setAttribute('aria-expanded', 'true');
+		});
+		singleControls.classList.add('hidden');
+		viewAllBtn.classList.add('bg-gray-100');
+		viewSingleBtn.classList.remove('bg-gray-100');
+		return;
 		}
 
-		function render() {
-		  if (!singleMode) {
-			steps.forEach(s => {
-			  s.classList.remove('hidden');
-			  s.setAttribute('aria-expanded', 'true');
-			});
-			singleControls.classList.add('hidden');
-			viewAllBtn.classList.add('bg-gray-100');
-			viewSingleBtn.classList.remove('bg-gray-100');
-			return;
-		  }
-
-		  steps.forEach((s, i) => {
-			if (i === idx) {
-			  s.classList.remove('hidden');
-			  s.setAttribute('aria-expanded', 'true');
-			} else {
-			  // stop media before hiding
-			  stopMedia(s);
-			  s.classList.add('hidden');
-			  s.setAttribute('aria-expanded', 'false');
-			}
-		  });
-
-		  singleControls.classList.remove('hidden');
-		  stepCounter.textContent = `Step ${idx + 1} of ${total}`;
-		  viewAllBtn.classList.remove('bg-gray-100');
-		  viewSingleBtn.classList.add('bg-gray-100');
+		steps.forEach((s, i) => {
+		if (i === idx) {
+			s.classList.remove('hidden');
+			s.setAttribute('aria-expanded', 'true');
+		} else {
+			// stop media before hiding
+			stopMedia(s);
+			s.classList.add('hidden');
+			s.setAttribute('aria-expanded', 'false');
 		}
-
-		// Toggle handlers
-		viewAllBtn.addEventListener('click', () => {
-		  singleMode = false;
-		  render();
 		});
 
-		viewSingleBtn.addEventListener('click', () => {
-		  singleMode = true;
-		  idx = Math.min(idx, total - 1);
-		  render();
-		});
+		singleControls.classList.remove('hidden');
+		stepCounter.textContent = `Step ${idx + 1} of ${total}`;
+		viewAllBtn.classList.remove('bg-gray-100');
+		viewSingleBtn.classList.add('bg-gray-100');
+	}
 
-		// Navigation
-		prevStep.addEventListener('click', () => {
-		  idx = (idx - 1 + total) % total;
-		  render();
-		});
-
-		nextStep.addEventListener('click', () => {
-		  idx = (idx + 1) % total;
-		  render();
-		});
-
-		// Initial state: list view
+	// Toggle handlers
+	viewAllBtn.addEventListener('click', () => {
+		singleMode = false;
 		render();
-	  })();
-	</script>
+	});
+
+	viewSingleBtn.addEventListener('click', () => {
+		singleMode = true;
+		idx = Math.min(idx, total - 1);
+		render();
+	});
+
+	// Navigation
+	prevStep.addEventListener('click', () => {
+		idx = (idx - 1 + total) % total;
+		render();
+	});
+
+	nextStep.addEventListener('click', () => {
+		idx = (idx + 1) % total;
+		render();
+	});
+
+	// Initial state: list view
+	render();
+	})();
+</script>
 </html>
