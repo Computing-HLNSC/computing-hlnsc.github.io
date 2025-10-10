@@ -78,287 +78,387 @@
 					<a class="bg-gray-200 p-2">HyperV</a>
 				</h2>
 				<hr><br>
+				<!-- Chapter Nav -->
+				<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b mb-4">
+					<div class="flex flex-wrap gap-2 p-3">
+						<a href="#create-vm" data-chapter-link="create-vm" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Creating a virtual machine</a>
+						<a href="#install-os" data-chapter-link="install-os" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Installing an operating system</a>
+						<a href="#networking" data-chapter-link="networking" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Networking on Hyper-V</a>
+						<a href="#delete-vm" data-chapter-link="delete-vm" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Deleting a virtual machine</a>
+					</div>
+				</nav>
+				<!-- Global Step Controls (re-used per chapter) -->
 				<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
-				  <!-- View toggle -->
-				  <div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
-					<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
-					<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
-				  </div>
-
-				  <!-- Single-step controls -->
-				  <div id="singleControls" class="hidden items-center gap-2">
-					<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 3</span>
-					<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
-					<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
-				  </div>
+					<div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
+						<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
+						<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
+					</div>
+					<div id="singleControls" class="hidden items-center gap-2">
+						<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 1</span>
+						<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
+						<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
+					</div>
 				</div>
-				<div id="stepsWrapper" class="space-y-8">
-				<!-- START OF GUIDE -->
+				<!-- CHAPTERS WRAPPER -->
+				<div id="chapters" class="">
+					<!-- Chapter 1: Creating a VM -->
+					<section class="chapter" id="create-vm" data-chapter="create-vm">
+						<h2 class="text-2xl font-bold mb-3">Chapter: Creating a virtual machine</h2>
+						<div id="stepsWrapper-create-vm" class="space-y-8">
+							<!-- Chapter Steps Start -->
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 1: Enabling HyperV as feature</h3>
+										<p class="text-gray-700">
+											1. Navigate to the Control Panel. Select Start, then search for Control Panel to open the application.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select Programs, then Programs and Features.
+										</p><br>
+										<p class="text-gray-700">
+											3. Select Turn Windows Features on or off.<br>
+										</p><br>
+										<p class="text-gray-700">
+											4. Select Hyper-V and then select OK.
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												You only need to complete this step if Hyper-V Manager is not present on your local machine/computer.
+											</p>
+										</div><br>
+										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+											<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
+											<p class="text-red-800 text-sm">HyperV is a feature which is only available on Pro, Enterprise, and Education versions of Windows.
+												<br><br><b>Full System Requirements (Minimum)</b><br>
+												• Windows 10/11 (Pro, Enterprise or Education).<br>
+												• 64-bit Processor with Second Level Address Translation.<br>
+												• CPU support for VM Monitor Mode Extension.<br>
+												• Minimum of 4-GB memory.
+											</p>
+										</div>
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 1: Enabling HyperV as feature</h3>
-								<p class="text-gray-700">
-									1. Navigate to the Control Panel. Select Start, then search for Control Panel to open the application.
-								</p><br>
-								<p class="text-gray-700">
-									2. Select Programs, then Programs and Features.
-								</p><br>
-								<p class="text-gray-700">
-									3. Select Turn Windows Features on or off.<br>
-								</p><br>
-								<p class="text-gray-700">
-									4. Select Hyper-V and then select OK.
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										You only need to complete this step if Hyper-V Manager is not present on your local machine/computer.
-									</p>
-								</div><br>
-								<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
-									<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
-									<p class="text-red-800 text-sm">HyperV is a feature which is only available on Pro, Enterprise, and Education versions of Windows.
-										<br><br><b>Full System Requirements (Minimum)</b><br>
-										• Windows 10/11 (Pro, Enterprise or Education).<br>
-										• 64-bit Processor with Second Level Address Translation.<br>
-										• CPU support for VM Monitor Mode Extension.<br>
-										• Minimum of 4-GB memory.
-									</p>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 1.png">
+									</div>
+
 								</div>
-							</div>
+							</article>
 
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 1.png">
-							</div>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="2" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 2: Deciding where to host the Virtual Machine</h3>
+										<p class="text-gray-700">
+											1. Open Hyper-V Manager.
+										</p><br>
+										<p class="text-gray-700">
+											2. Right click Hyper-V Manager in the left column
+										</p><br>
+										<p class="text-gray-700">
+											3. Select `Connect to Server...`<br>
+										</p><br>
+										<p class="text-gray-700">
+											4. Select where you want to host the virtual machine.
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												Virtual machines can be created either on the local machine (the computer you are using) or on a remote machine (another computer).
+											</p><br>
+											<p class="text-yellow-800 text-sm">
+												The machine which has the virtual machine stored on it, is called the host.
+											</p>
+										</div><br>
+										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+											<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
+											<p class="text-red-800 text-sm">If you are connecting to another host, such as a server on a network. You may find you need administrator account privileges. Simply run Hyper-V Manager as admin.</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 2.png">
+									</div>
 
-						</div>
-					</article>
-
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="2" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 2: Deciding where to host the Virtual Machine</h3>
-								<p class="text-gray-700">
-									1. Open Hyper-V Manager.
-								</p><br>
-								<p class="text-gray-700">
-									2. Right click Hyper-V Manager in the left column
-								</p><br>
-								<p class="text-gray-700">
-									3. Select `Connect to Server...`<br>
-								</p><br>
-								<p class="text-gray-700">
-									4. Select where you want to host the virtual machine.
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										Virtual machines can be created either on the local machine (the computer you are using) or on a remote machine (another computer).
-									</p><br>
-									<p class="text-yellow-800 text-sm">
-										The machine which has the virtual machine stored on it, is called the host.
-									</p>
-								</div><br>
-								<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
-									<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
-									<p class="text-red-800 text-sm">If you are connecting to another host, such as a server on a network. You may find you need administrator account privileges. Simply run Hyper-V Manager as admin.</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 2.png">
-							</div>
+							</article>
 
-						</div>
-					</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="3" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 3: Creating the virtual machine</h3>
+										<p class="text-gray-700">
+											1. Select the host in the left column.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `New` → `Virtual Machine` in the right column.
+										</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 3.png">
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="3" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 3: Creating the virtual machine</h3>
-								<p class="text-gray-700">
-									1. Select the host in the left column.
-								</p><br>
-								<p class="text-gray-700">
-									2. Select `New` → `Virtual Machine` in the right column.
-								</p>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 3.png">
-							</div>
-
-						</div>
-					</article>
-
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="4" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 4: Configuring (Specify Name and Location	)</h3>
-								<p class="text-gray-700">
-									1. Type the name of your virtual machine
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Next`
-								</p><br>
-								<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
-									<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
-									<p class="text-red-800 text-sm">You should follow a similar naming convention as detailed below.</p>
-									<p class="text-red-800 text-sm">{CourseLevel}_{Firstname}_{Lastname}_{VirtualMachineNumber}</p>
-									<p class="text-red-800 text-sm">Example: L4_Harry_Potter_0</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 4.png">
-							</div>
+							</article>
 
-						</div>
-					</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="4" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 4: Configuring (Specify Name and Location	)</h3>
+										<p class="text-gray-700">
+											1. Type the name of your virtual machine
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Next`
+										</p><br>
+										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+											<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
+											<p class="text-red-800 text-sm">You should follow a similar naming convention as detailed below.</p>
+											<p class="text-red-800 text-sm">{CourseLevel}_{Firstname}_{Lastname}_{VirtualMachineNumber}</p>
+											<p class="text-red-800 text-sm">Example: L4_Harry_Potter_0</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 4.png">
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="5" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 5: Configuring (Specify Generation)</h3>
-								<p class="text-gray-700">
-									1. Select the generation of virtual machine you wish to create
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Next`
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										Generation 1: Use for legacy operating systems or when older hardware emulation (BIOS, IDE, legacy network adapters) is required.
-									</p><br>
-									<p class="text-yellow-800 text-sm">
-										Generation 2: Use for modern operating systems supporting UEFI, Secure Boot, and faster performance through virtual SCSI and PXE boot improvements.
-									</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 5.png">
-							</div>
+							</article>
 
-						</div>
-					</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="5" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 5: Configuring (Specify Generation)</h3>
+										<p class="text-gray-700">
+											1. Select the generation of virtual machine you wish to create
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												Generation 1: Use for legacy operating systems or when older hardware emulation (BIOS, IDE, legacy network adapters) is required.
+											</p><br>
+											<p class="text-yellow-800 text-sm">
+												Generation 2: Use for modern operating systems supporting UEFI, Secure Boot, and faster performance through virtual SCSI and PXE boot improvements.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 5.png">
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="6" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 6: Configuring (Assign Memory)</h3>
-								<p class="text-gray-700">
-									1. Enter the start up memory
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Next`
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										You need to weigh up memory needs of the virtual machine against the available resources of the host.
-									</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 6.png">
-							</div>
+							</article>
 
-						</div>
-					</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="6" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 6: Configuring (Assign Memory)</h3>
+										<p class="text-gray-700">
+											1. Enter the start up memory
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												You need to weigh up memory needs of the virtual machine against the available resources of the host.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 6.png">
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="7" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 7: Configuring (Configure Networking)</h3>
-								<p class="text-gray-700">
-									1. Select the network connection you wish the virtual machine to use.
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Next`
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										Virtual network switches and subsiquent connections to those switches can be setup later.
-									</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 7.png">
-							</div>
+							</article>
 
-						</div>
-					</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="7" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 7: Configuring (Configure Networking)</h3>
+										<p class="text-gray-700">
+											1. Select the network connection you wish the virtual machine to use.
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												Virtual network switches and subsiquent connections to those switches can be setup later.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 7.png">
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="8" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 8: Configuring (Configure Virtual Hard Disk)</h3>
-								<p class="text-gray-700">
-									1. Enter the size of storage you wish to allocate to the machine.
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Next`
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										You need to weigh up storage needs of the virtual machine against the available resources of the host.
-									</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 8.png">
-							</div>
+							</article>
 
-						</div>
-					</article>
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="8" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 8: Configuring (Configure Virtual Hard Disk)</h3>
+										<p class="text-gray-700">
+											1. Enter the size of storage you wish to allocate to the machine.
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												You need to weigh up storage needs of the virtual machine against the available resources of the host.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 8.png">
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="9" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 9: Configuring (Installation Options)</h3>
-								<p class="text-gray-700">
-									1. This is where you select if you are going to install the operating system now, or do it later.
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Next`
-								</p><br>
-								<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-									<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
-									<p class="text-yellow-800 text-sm">
-										If you are connected to a remote host, then the operating system you want to install (ISO file) needs to be accessible from the host.
-									</p>
 								</div>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 9.png">
-							</div>
+							</article>
 
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="9" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 9: Configuring (Installation Options)</h3>
+										<p class="text-gray-700">
+											1. This is where you select if you are going to install the operating system now, or do it later.
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												If you are connected to a remote host, then the operating system you want to install (ISO file) needs to be accessible from the host.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 9.png">
+									</div>
+
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="10" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 10: Summary</h3>
+										<p class="text-gray-700">
+											1. Verify the choices and ammend anything if needed.
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Finish`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 10.png">
+									</div>
+
+								</div>
+							</article>
+							<!-- Chapter Steps End -->
 						</div>
-					</article>
+					</section>
+					<!-- Chapter 2: Installing an operating system -->
+					<section class="chapter hidden" id="install-os" data-chapter="install-os">
+						<h2 class="text-2xl font-bold mb-3">Chapter: Installing an operating system</h2>
+						<div id="stepsWrapper-install-os" class="space-y-8">
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 1: Enabling HyperV as feature</h3>
+										<p class="text-gray-700">
+											1. Navigate to the Control Panel. Select Start, then search for Control Panel to open the application.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select Programs, then Programs and Features.
+										</p><br>
+										<p class="text-gray-700">
+											3. Select Turn Windows Features on or off.<br>
+										</p><br>
+										<p class="text-gray-700">
+											4. Select Hyper-V and then select OK.
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">General Information</h4>
+											<p class="text-yellow-800 text-sm">
+												You only need to complete this step if Hyper-V Manager is not present on your local machine/computer.
+											</p>
+										</div><br>
+										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+											<h4 class="font-bold text-red-700 mb-1">Important Information</h4>
+											<p class="text-red-800 text-sm">HyperV is a feature which is only available on Pro, Enterprise, and Education versions of Windows.
+												<br><br><b>Full System Requirements (Minimum)</b><br>
+												• Windows 10/11 (Pro, Enterprise or Education).<br>
+												• 64-bit Processor with Second Level Address Translation.<br>
+												• CPU support for VM Monitor Mode Extension.<br>
+												• Minimum of 4-GB memory.
+											</p>
+										</div>
+									</div>
 
-					<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="10" aria-expanded="true">
-						<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-							<div>
-								<h3 class="text-xl font-semibold mb-2">Step 10: Summary</h3>
-								<p class="text-gray-700">
-									1. Verify the choices and ammend anything if needed.
-								</p><br>
-								<p class="text-gray-700">
-									2. Press `Finish`
-								</p><br>
-							</div>
-							<div class="bg-gray-100 border rounded-lg p-3">
-								<img src="./images/hyperv/step 10.png">
-							</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 1.png">
+									</div>
 
+								</div>
+							</article>
 						</div>
-					</article>
-
-
-
-				<!-- END OF GUIDE -->
+					</section>
+					<!-- Chapter 3: Networking on Hyper-V -->
+					<section class="chapter hidden" id="networking" data-chapter="networking">
+						<h2 class="text-2xl font-bold mb-3">Chapter: Networking on Hyper-V</h2>
+						<div id="stepsWrapper-networking" class="space-y-8">
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 1: Create a virtual switch</h3>
+										<p class="text-gray-700 mb-4">Use Virtual Switch Manager to add External, Internal, or Private switches.</p>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Note</h4>
+											<p class="text-yellow-800 text-sm">External binds to a physical NIC; Internal is host+VM; Private is VM-only.</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/vswitch.png" alt="Virtual Switch Manager">
+									</div>
+								</div>
+							</article>
+							<!-- Add more networking steps -->
+						</div>
+					</section>
+					<!-- Chapter 4: Deleting a virtual machine -->
+					<section class="chapter hidden" id="delete-vm" data-chapter="delete-vm">
+						<h2 class="text-2xl font-bold mb-3">Chapter: Deleting a virtual machine</h2>
+						<div id="stepsWrapper-delete-vm" class="space-y-8">
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 1: Clean shutdown & remove</h3>
+										<p class="text-gray-700 mb-4">Turn off the VM (not save state), then right-click → Delete.</p>
+										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+											<h4 class="font-bold text-red-700 mb-1">Important</h4>
+											<p class="text-red-800 text-sm">Deleting the VM doesn’t always delete VHDX files. Remove them from storage if needed.</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/delete-vm.png" alt="Delete VM">
+									</div>
+								</div>
+							</article>
+							<!-- Add more deletion steps -->
+						</div>
+					</section>
 				</div>
 			</div>
 		</div>
@@ -366,85 +466,110 @@
 </body>
 
 <script>
-	(function () {
-	const steps = Array.from(document.querySelectorAll('#stepsWrapper [data-step]'));
-	const total = steps.length;
+(function () {
+  // --- CHAPTER SWITCHING ---
+  const chapterLinks = document.querySelectorAll('[data-chapter-link]');
+  const chapters = Array.from(document.querySelectorAll('.chapter'));
 
-	const viewAllBtn = document.getElementById('viewAllBtn');
-	const viewSingleBtn = document.getElementById('viewSingleBtn');
-	const singleControls = document.getElementById('singleControls');
-	const stepCounter = document.getElementById('stepCounter');
-	const prevStep = document.getElementById('prevStep');
-	const nextStep = document.getElementById('nextStep');
+  function setActiveChapter(id, pushHash = true) {
+    chapters.forEach(ch => ch.classList.toggle('hidden', ch.id !== id));
+    chapterLinks.forEach(a => {
+      const active = a.getAttribute('data-chapter-link') === id;
+      a.classList.toggle('bg-blue-50', active);
+      a.classList.toggle('border-blue-500', active);
+      a.classList.toggle('text-blue-700', active);
+    });
+    localStorage.setItem('hypervChapter', id);
+    if (pushHash) location.hash = id;
+    // Re-scope steps to the newly active chapter
+    initStepsForCurrentChapter();
+  }
 
-	let singleMode = true;
-	let idx = 0; // 0-based index for current step
+  chapterLinks.forEach(a => {
+    a.addEventListener('click', (e) => {
+      // Allow normal anchor behavior but still drive state
+      const id = a.getAttribute('data-chapter-link');
+      setActiveChapter(id);
+    });
+  });
 
-	function stopMedia(el) {
-		// Reset <iframe> src to stop playback when hidden
-		el.querySelectorAll('iframe').forEach(f => {
-		const src = f.getAttribute('src');
-		f.setAttribute('src', src);
-		});
-		// For <video> elements, pause
-		el.querySelectorAll('video').forEach(v => v.pause());
-	}
+  function getInitialChapter() {
+    const fromHash = location.hash.replace('#','').trim();
+    if (fromHash && document.getElementById(fromHash)) return fromHash;
+    const saved = localStorage.getItem('hypervChapter');
+    if (saved && document.getElementById(saved)) return saved;
+    return 'create-vm';
+  }
 
-	function render() {
-		if (!singleMode) {
-		steps.forEach(s => {
-			s.classList.remove('hidden');
-			s.setAttribute('aria-expanded', 'true');
-		});
-		singleControls.classList.add('hidden');
-		viewAllBtn.classList.add('bg-gray-100');
-		viewSingleBtn.classList.remove('bg-gray-100');
-		return;
-		}
+  window.addEventListener('hashchange', () => {
+    const id = location.hash.replace('#','').trim();
+    if (id && document.getElementById(id)) setActiveChapter(id, false);
+  });
 
-		steps.forEach((s, i) => {
-		if (i === idx) {
-			s.classList.remove('hidden');
-			s.setAttribute('aria-expanded', 'true');
-		} else {
-			// stop media before hiding
-			stopMedia(s);
-			s.classList.add('hidden');
-			s.setAttribute('aria-expanded', 'false');
-		}
-		});
+  // --- STEPS (scoped to current chapter) ---
+  const viewAllBtn = document.getElementById('viewAllBtn');
+  const viewSingleBtn = document.getElementById('viewSingleBtn');
+  const singleControls = document.getElementById('singleControls');
+  const stepCounter = document.getElementById('stepCounter');
+  const prevStep = document.getElementById('prevStep');
+  const nextStep = document.getElementById('nextStep');
 
-		singleControls.classList.remove('hidden');
-		stepCounter.textContent = `Step ${idx + 1} of ${total}`;
-		viewAllBtn.classList.remove('bg-gray-100');
-		viewSingleBtn.classList.add('bg-gray-100');
-	}
+  let singleMode = true;
+  let idx = 0;
+  let currentSteps = [];
 
-	// Toggle handlers
-	viewAllBtn.addEventListener('click', () => {
-		singleMode = false;
-		render();
-	});
+  function stopMedia(el) {
+    el.querySelectorAll('iframe').forEach(f => f.src = f.src);
+    el.querySelectorAll('video').forEach(v => v.pause());
+  }
 
-	viewSingleBtn.addEventListener('click', () => {
-		singleMode = true;
-		idx = Math.min(idx, total - 1);
-		render();
-	});
+  function renderSteps() {
+    const total = currentSteps.length || 0;
 
-	// Navigation
-	prevStep.addEventListener('click', () => {
-		idx = (idx - 1 + total) % total;
-		render();
-	});
+    if (!singleMode) {
+      currentSteps.forEach(s => {
+        s.classList.remove('hidden');
+        s.setAttribute('aria-expanded','true');
+      });
+      singleControls.classList.add('hidden');
+      viewAllBtn.classList.add('bg-gray-100');
+      viewSingleBtn.classList.remove('bg-gray-100');
+      return;
+    }
 
-	nextStep.addEventListener('click', () => {
-		idx = (idx + 1) % total;
-		render();
-	});
+    currentSteps.forEach((s, i) => {
+      if (i === idx) {
+        s.classList.remove('hidden');
+        s.setAttribute('aria-expanded','true');
+      } else {
+        stopMedia(s);
+        s.classList.add('hidden');
+        s.setAttribute('aria-expanded','false');
+      }
+    });
 
-	// Initial state: list view
-	render();
-	})();
+    singleControls.classList.remove('hidden');
+    stepCounter.textContent = `Step ${Math.min(idx+1,total)} of ${total || 1}`;
+    viewAllBtn.classList.remove('bg-gray-100');
+    viewSingleBtn.classList.add('bg-gray-100');
+  }
+
+  function initStepsForCurrentChapter() {
+    const active = document.querySelector('.chapter:not(.hidden)');
+    currentSteps = active ? Array.from(active.querySelectorAll('[data-step]')) : [];
+    idx = 0;
+    renderSteps();
+  }
+
+  // Controls
+  viewAllBtn.addEventListener('click', () => { singleMode = false; renderSteps(); });
+  viewSingleBtn.addEventListener('click', () => { singleMode = true; renderSteps(); });
+  prevStep.addEventListener('click', () => { if (!currentSteps.length) return; idx = (idx - 1 + currentSteps.length) % currentSteps.length; renderSteps(); });
+  nextStep.addEventListener('click', () => { if (!currentSteps.length) return; idx = (idx + 1) % currentSteps.length; renderSteps(); });
+
+  // INIT
+  setActiveChapter(getInitialChapter(), false);
+})();
 </script>
+
 </html>
