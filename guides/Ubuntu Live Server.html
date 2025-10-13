@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head"></head>
+
+<body class="bg-[#0D3B66] font-sans">
+	<div id="header"></div>
+	<div id="imodal"></div>
+
+	<section class="py-3">
+		<div class="container mx-auto px-4">
+			<div class="bg-white shadow-lg rounded-lg p-6">
+				<h2 class="text-l font-bold mb-4 p-2">
+					<a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+					<a class="bg-gray-200 p-2">Ubuntu Live Server</a>
+				</h2>
+				<hr><br>
+				<!-- Chapter Nav -->
+				<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b mb-4">
+					<div class="flex flex-wrap gap-2 p-3">
+						<a href="#create-vm" data-chapter-link="create-vm" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Creating a virtual machine</a>
+						<a href="#install-os" data-chapter-link="install-os" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Installing Windows (Operating System)</a>
+						<a href="#networking" data-chapter-link="networking" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Networking on Hyper-V</a>
+						<a href="#delete-vm" data-chapter-link="delete-vm" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Deleting a virtual machine</a>
+					</div>
+				</nav>
+
+				<!-- Global Step Controls (re-used per chapter) -->
+				<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+					<div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
+						<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
+						<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
+					</div>
+					<div id="singleControls" class="hidden items-center gap-2">
+						<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 1</span>
+						<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
+						<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
+					</div>
+				</div>
+
+				<div id="chapters" class="">
+					<!-- Chapter 1:  -->
+					<section class="chapter" id="create-vm" data-chapter="create-vm">
+						<div id="stepsWrapper-create-vm" class="">
+							<!-- Article Steps Here -->
+						</div>
+					</section>
+					<!-- Chapter 2:  -->
+					<section class="chapter hidden" id="install-os" data-chapter="install-os">
+						<div id="stepsWrapper-install-os" class="">
+							<!-- Article Steps Here -->
+						</div>
+					</section>
+
+					<!-- Chapter 3:  -->
+					<section class="chapter hidden" id="networking" data-chapter="networking">
+						<div id="stepsWrapper-networking" class="">
+							<!-- Article Steps Here -->
+						</div>
+					</section>
+
+					<!-- Chapter 4:  -->
+					<section class="chapter hidden" id="delete-vm" data-chapter="delete-vm">
+						<div id="stepsWrapper-delete-vm" class="">
+							<!-- Article Steps Here -->
+						</div>
+					
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+<script src="../imports/imodal.js"></script> <!-- Js for the contact/info/turnitinuk buttons -->
+<script src="../imports/base.js"></script> <!-- Js for the header and modal imports -->
+<script>
+(function() {
+	// --- CHAPTER SWITCHING ---
+	const chapterLinks = document.querySelectorAll('[data-chapter-link]');
+	const chapters = Array.from(document.querySelectorAll('.chapter'));
+
+	function setActiveChapter(id, pushHash = true) {
+		chapters.forEach(ch => ch.classList.toggle('hidden', ch.id !== id));
+		chapterLinks.forEach(a => {
+		const active = a.getAttribute('data-chapter-link') === id;
+			a.classList.toggle('bg-blue-50', active);
+			a.classList.toggle('border-blue-500', active);
+			a.classList.toggle('text-blue-700', active);
+		});
+		localStorage.setItem('hypervChapter', id);
+		if (pushHash) location.hash = id;
+
+		// Scroll to top smoothly when changing chapter
+		window.scrollTo(0,0);
+
+		// Re-scope steps to the newly active chapter
+		initStepsForCurrentChapter();
+	}
+
+
+	chapterLinks.forEach(a => {
+		a.addEventListener('click', (e) => {
+			// Allow normal anchor behavior but still drive state
+			const id = a.getAttribute('data-chapter-link');
+			setActiveChapter(id);
+		});
+	});
+
+	function getInitialChapter() {
+		const fromHash = location.hash.replace('#', '').trim();
+		if (fromHash && document.getElementById(fromHash)) return fromHash;
+		const saved = localStorage.getItem('hypervChapter');
+		if (saved && document.getElementById(saved)) return saved;
+		return 'create-vm';
+	}
+
+	window.addEventListener('hashchange', () => {
+		const id = location.hash.replace('#', '').trim();
+		if (id && document.getElementById(id)) setActiveChapter(id, false);
+	});
+
+	// --- STEPS (scoped to current chapter) ---
+	const viewAllBtn = document.getElementById('viewAllBtn');
+	const viewSingleBtn = document.getElementById('viewSingleBtn');
+	const singleControls = document.getElementById('singleControls');
+	const stepCounter = document.getElementById('stepCounter');
+	const prevStep = document.getElementById('prevStep');
+	const nextStep = document.getElementById('nextStep');
+
+	let singleMode = true;
+	let idx = 0;
+	let currentSteps = [];
+
+	function stopMedia(el) {
+		el.querySelectorAll('iframe').forEach(f => f.src = f.src);
+		el.querySelectorAll('video').forEach(v => v.pause());
+	}
+
+	function renderSteps() {
+		const total = currentSteps.length || 0;
+
+		if (!singleMode) {
+			currentSteps.forEach(s => {
+				s.classList.remove('hidden');
+				s.setAttribute('aria-expanded', 'true');
+			});
+			singleControls.classList.add('hidden');
+			viewAllBtn.classList.add('bg-gray-100');
+			viewSingleBtn.classList.remove('bg-gray-100');
+			return;
+		}
+
+		currentSteps.forEach((s, i) => {
+			if (i === idx) {
+				s.classList.remove('hidden');
+				s.setAttribute('aria-expanded', 'true');
+			} else {
+				stopMedia(s);
+				s.classList.add('hidden');
+				s.setAttribute('aria-expanded', 'false');
+			}
+		});
+
+		singleControls.classList.remove('hidden');
+		stepCounter.textContent = `Step ${Math.min(idx+1,total)} of ${total || 1}`;
+		viewAllBtn.classList.remove('bg-gray-100');
+		viewSingleBtn.classList.add('bg-gray-100');
+	}
+
+	function initStepsForCurrentChapter() {
+		const active = document.querySelector('.chapter:not(.hidden)');
+		currentSteps = active ? Array.from(active.querySelectorAll('[data-step]')) : [];
+		idx = 0;
+		renderSteps();
+	}
+
+	// Controls
+	viewAllBtn.addEventListener('click', () => {
+		singleMode = false;
+		renderSteps();
+	});
+	viewSingleBtn.addEventListener('click', () => {
+		singleMode = true;
+		renderSteps();
+	});
+	prevStep.addEventListener('click', () => {
+		if (!currentSteps.length) return;
+		idx = (idx - 1 + currentSteps.length) % currentSteps.length;
+		renderSteps();
+	});
+	nextStep.addEventListener('click', () => {
+		if (!currentSteps.length) return;
+		idx = (idx + 1) % currentSteps.length;
+		renderSteps();
+	});
+
+	// INIT
+	setActiveChapter(getInitialChapter(), false);
+})();
+</script>
+
+</html>
