@@ -1,3 +1,0 @@
-concurrency:
-  group: push-${{ github.branch }}
-  cancel-in-progress: true
