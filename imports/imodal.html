@@ -1,0 +1,66 @@
+<!-- Floating Buttons -->
+<div class="fixed right-5 bottom-5 flex flex-col items-center space-y-3 z-50">
+    <!-- Contact Button -->
+    <button id="contactBtn"
+        class="w-14 h-14 flex items-center justify-center bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white rounded-full shadow-lg transition">
+        <span style="font-size:200%;">✆</span>
+    </button>
+
+    <!-- Info Button -->
+    <button id="infoBtn"
+        class="w-14 h-14 flex items-center justify-center bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse text-white rounded-full shadow-lg transition">
+        <span style="font-size:200%;">🛈</span>
+    </button>
+
+    <!-- Extra Button (Turnitin Example) -->
+    <button onclick="window.open('https://turnitinuk.com/', '_blank')"
+        class="w-14 h-14 flex items-center justify-center bg-gray-700 bg-opacity-50 hover:bg-gray-700 hover:animate-pulse rounded-full shadow-lg transition">
+        <img src="./turnitinuk-logo.png" alt="Turnitin" class="w-7 h-7 object-contain">
+    </button>
+</div>
+
+<!-- Floating Modal -->
+<div id="floatingModal" class="hidden fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-lg w-11/12 md:w-2/3 lg:w-1/2 max-h-[80vh] overflow-y-auto relative">
+    <button id="closeModal"
+            class="absolute top-2 right-2 text-gray-600 hover:text-gray-900 text-2xl font-bold">&times;</button>
+    <div id="modalContent" class="p-6"></div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<section class="py-3" hidden=True>
+    <div class="container mx-auto px-4">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <div class="md:flex md:items-center">
+                <div class="md:w-1/2">					
+                    <iframe
+                        class="w-full h-64 rounded-lg"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d2453.0094210724747!2d-2.6988044285478052!3d52.061352108738554!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48704bcc358d9f1f%3A0x8695f6f103b7cb62!2sHerefordshire%20College!5e0!3m2!1sen!2sus!4v1736431450302!5m2!1sen!2sus"
+                        allowfullscreen=""
+                        loading="lazy"
+                    ></iframe>
+                </div>
+                <div class="md:w-1/2 md:pl-6">
+                    <h2 class="text-xl font-bold mb-2">Contact Us</h2>
+                    <p><strong>Address:</strong> Folly Lane, Hereford, England, HR1 1LS, United Kingdom</p>
+                    <p><strong>Email:</strong> <a href="mailto:computing@hlnsc.ac.uk" class="text-blue-600 underline">computing@hlnsc.ac.uk</a></p>
+                    <p><strong>Phone:</strong> 01432 365489</p>
+                    <p><strong>Contact:</strong> Lewis Campbell</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Us -->
+<section hidden=True>
+    <div class="container mx-auto px-4">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+            <h2 class="text-xl font-bold mb-4">About Us</h2>
+            <p class="mb-4">Herefordshire College is known for providing high-quality IT and computing courses that are practical and help both current and future IT professionals develop the essential skills needed for successful careers in the computing field.</p>
+            <p class="mb-4">We offer a range of courses, including short fundamental hobby courses up to stage 2 of higher education such as the Higher National Diploma (Level 5), as well as professional courses. Our courses are for those starting out in their careers or those looking to reskill into the IT industry; we provide full-time, short-term, specialised, and hobbyist courses.</p>
+            <p>Our purpose-built labs, equipped with industry-standard technology, ensure learners gain hands-on experience in computing, networking, cybersecurity, and more.</p>
+        </div>
+    </div>
+</section>
