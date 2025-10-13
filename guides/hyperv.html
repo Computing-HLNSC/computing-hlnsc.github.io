@@ -82,7 +82,7 @@
 				<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b mb-4">
 					<div class="flex flex-wrap gap-2 p-3">
 						<a href="#create-vm" data-chapter-link="create-vm" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Creating a virtual machine</a>
-						<a href="#install-os" data-chapter-link="install-os" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Installing an operating system</a>
+						<a href="#install-os" data-chapter-link="install-os" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Installing Windows (Operating System)</a>
 						<a href="#networking" data-chapter-link="networking" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Networking on Hyper-V</a>
 						<a href="#delete-vm" data-chapter-link="delete-vm" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Deleting a virtual machine</a>
 					</div>
@@ -99,7 +99,6 @@
 						<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
 					</div>
 				</div>
-				<!-- CHAPTERS WRAPPER -->
 				<div id="chapters" class="">
 					<!-- Chapter 1: Creating a VM -->
 					<section class="chapter" id="create-vm" data-chapter="create-vm">
@@ -371,7 +370,6 @@
 					<!-- Chapter 2: Installing an operating system -->
 					<section class="chapter hidden" id="install-os" data-chapter="install-os">
 						<div id="stepsWrapper-install-os" class="">
-
 							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
@@ -393,6 +391,7 @@
 									</div>
 								</div>
 							</article>
+
 							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="2" aria-expanded="true">
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
@@ -411,6 +410,27 @@
 									<div class="bg-gray-100 border rounded-lg p-3">
 										<img src="./images/hyperv/step 12.png">
 										<img src="./images/hyperv/step 13.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="2.5" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 2.5: Enabling TPM & Secure Boot</h3>
+										<p class="text-gray-700">
+											Depending on your chosen operating system you will need to enable the following
+										</p><br>
+										<p class="text-gray-700">
+											2. Tick `Enable Secure Boot`.
+										</p><br>
+										<p class="text-gray-700">
+											3. Tick `Enable Trusted Platform Module`.
+										</p><br>
+									</div>
+
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 13-5.png">
 									</div>
 								</div>
 							</article>
@@ -471,7 +491,6 @@
 										<img src="./images/hyperv/step 15.png">
 									</div>
 								
-
 									<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
 										<h4 class="font-bold text-yellow-700 mb-1">Common Install Error</h4>
 										<p class="text-yellow-800 text-sm">
@@ -482,13 +501,262 @@
 											1. Press the `Reset` button at the top of the connection window.<br>
 											2. Press the spacebar when booting / prompted (You need to be clicked into/focused in the virtual machine connection window).
 										</p>
-
-
 									</div>
 								</div>
 							</article>
 
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="5" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 5: Language formats</h3>
+										<p class="text-gray-700">
+											1. Select your desired language and formats.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Next`
+										</p><br>
+										<p class="text-gray-700">
+											3. Select your keyboard/input method.
+										</p><br>
+										<p class="text-gray-700">
+											4. Select `Next`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 16.png">
+									</div>
+								</div>
+							</article>
 
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="6" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 6: Installing Windows 11</h3>
+										<p class="text-gray-700">
+											1. For a new install click `Install Windows 11`
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `I agree everything will be deleted including files, apps, and settings`
+										</p><br>
+										<p class="text-gray-700">
+											3. Select `Next`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 17.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="7" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 7: Selecting a version</h3>
+										<p class="text-gray-700">
+											1. Select your prefered version of Windows to install
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Next`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 19.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="8" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 8: Licence Terms</h3>
+										<p class="text-gray-700">
+											1. It is the installers responsibility to read and understand the terms of use (inc licencing)
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Accept`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 20.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="9" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 9: Installation location</h3>
+										<p class="text-gray-700">
+											1. Select your storage disk, where the operating system will be installed.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Next`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 21.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="10" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 10: Ready to install!</h3>
+										<p class="text-gray-700">
+											1. Read the summary and select `Next` if you want to proceed
+										</p><br>
+										<p class="text-gray-700">
+											2. Your operating system is now installing
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Popular Operating Systems</h4>
+											<p class="text-yellow-800 text-sm">
+												Your virtual machine may restart a few times during this installation process.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 22.png">
+										<img src="./images/hyperv/step 23.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="11" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 11: Configuration</h3>
+										<p class="text-gray-700">
+											1. You can now select the country and keyboard layout
+										</p><br>
+										<p class="text-gray-700">
+											2. Press `Yes`
+										</p><br>
+										<p class="text-gray-700">
+											3. You can optionally add other keyboard layouts, or press `Skip`
+										</p><br>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 24.png">
+										<img src="./images/hyperv/step 25.png">
+										<img src="./images/hyperv/step 26.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="12" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 12: OS Networking</h3>
+										<p class="text-gray-700">
+											1. You can now select a network if you have a valid adapter setup
+										</p><br>
+										<p class="text-gray-700">
+											2. Otherwise you can press `I don't have internet` to go through the local account setup process
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Popular Operating Systems</h4>
+											<p class="text-yellow-800 text-sm">
+												It is the recommendation for networking and on site devices to use local accounts (so setup without internet).
+												Microsoft may push you to use a Microsoft account if you go through the online setup process.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 27.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="13" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 13: Account Name</h3>
+										<p class="text-gray-700">
+											1. Enter a name of who is going to use the PC
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Popular Operating Systems</h4>
+											<p class="text-yellow-800 text-sm">
+												If you are setting up a local account, which wont be used by anyone it is recommended that you use the username `Admin` or `Administrator`
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 28.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="14" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 14: Account Password</h3>
+										<p class="text-gray-700">
+											1. Enter a suitable strong password for the account.
+										</p><br>
+										<p class="text-gray-700">
+											2. Select `Next`
+										</p><br>
+										<p class="text-gray-700">
+											2. Pick the 3 security questions and enter an answer `Next`
+										</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 29.png">
+										<img src="./images/hyperv/step 30.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="14" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 14: Account Password</h3>
+										<p class="text-gray-700">
+											1. The next questions are about tracking and using your data
+										</p><br>
+										<p class="text-gray-700">
+											2. Select your prefered option and `Accept` / `Next`
+										</p><br>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Popular Operating Systems</h4>
+											<p class="text-yellow-800 text-sm">
+												It is recommended to select No / The least invasive option on all questions.
+											</p>
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 31.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="15" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 15: Completed Setup</h3>
+										<p class="text-gray-700">
+											1. You will now see a `Hi`, `This might take a few minutes` Screen
+										</p><br>
+										<p class="text-gray-700">
+											2. This is the end of the setup process, you will shortly load into the desktop environment.
+										</p><br>
+										<div class="bg-gray-100 border rounded-lg p-3">
+											<img src="./images/hyperv/step 34.png">
+										</div>
+										
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 32.png">
+										<img src="./images/hyperv/step 33.png">
+									</div>
+								</div>
+							</article>
 						</div>
 					</section>
 					<!-- Chapter 3: Networking on Hyper-V -->
@@ -498,18 +766,64 @@
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
 										<h3 class="text-xl font-semibold mb-2">Step 1: Create a virtual switch</h3>
-										<p class="text-gray-700 mb-4">Use Virtual Switch Manager to add External, Internal, or Private switches.</p>
-										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
-											<h4 class="font-bold text-yellow-700 mb-1">Note</h4>
-											<p class="text-yellow-800 text-sm">External binds to a physical NIC; Internal is host+VM; Private is VM-only.</p>
-										</div>
+										<p class="text-gray-700 mb-4">1. Right click the host on `Hyper V Manager`.</p>
+										<p class="text-gray-700 mb-4">2. Select `Virtual Switch Manager...`.</p>
 									</div>
 									<div class="bg-gray-100 border rounded-lg p-3">
-										<img src="./images/hyperv/vswitch.png" alt="Virtual Switch Manager">
+										<img src="./images/hyperv/step 35.png"><br>
+										<img src="./images/hyperv/step 36.png">
 									</div>
 								</div>
 							</article>
-							<!-- Add more networking steps -->
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="2" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 2: Selecting a switch type</h3>
+										<p class="text-gray-700 mb-4">1. Select `New virtual network switch`.</p>
+										<p class="text-gray-700 mb-4">2. Select your desired switch type.</p>
+										<p class="text-gray-700 mb-4">3. `Create Virtual Switch`.</p>
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Note</h4>
+											<p class="text-yellow-800 text-sm">`External` binds to a physical interface card. `Internal` is the host and the virtual machines, and `Private` is virtual machine only.</p>
+											<br><img src="./images/hyperv/step 36-5.png">
+										</div>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 36.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="3" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 3: Configuring a new switch</h3>
+										<p class="text-gray-700 mb-4">1. Enter a name and description for your switch.</p>
+										<p class="text-gray-700 mb-4">2. Select `OK`</p>
+										<p class="text-gray-700 mb-4">3. Select your virtual machines `Settings...` (Right click)</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 36.png">
+										<img src="./images/hyperv/step 37.png">
+										<img src="./images/hyperv/step 38.png">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="4" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Step 4: Assigning a switch</h3>
+										<p class="text-gray-700 mb-4">1. Under the `Network Adapter` tab</p>
+										<p class="text-gray-700 mb-4">2. Select your newly created Virtual Switch</p>
+										<p class="text-gray-700 mb-4">3. Select `OK` when done</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="./images/hyperv/step 39.png">
+									</div>
+								</div>
+							</article>
 						</div>
 					</section>
 					<!-- Chapter 4: Deleting a virtual machine -->
@@ -519,19 +833,23 @@
 								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 									<div>
 										<h3 class="text-xl font-semibold mb-2">Step 1: Clean shutdown & remove</h3>
-										<p class="text-gray-700 mb-4">Turn off the VM (not save state), then right-click → Delete.</p>
+										<p class="text-gray-700 mb-4">1. Turn off the virtual machine, right-click → `Turn Off`</p>
+										<p class="text-gray-700 mb-4">2. Right-click the virtual machine and select `Delete`</p>
+
 										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
 											<h4 class="font-bold text-red-700 mb-1">Important</h4>
-											<p class="text-red-800 text-sm">Deleting the VM doesn’t always delete VHDX files. Remove them from storage if needed.</p>
+											<p class="text-red-800 text-sm">Deleting the virtual machine doesn’t always delete VHDX/storage files. Remove them from the hosts storage if needed.</p>
 										</div>
 									</div>
 									<div class="bg-gray-100 border rounded-lg p-3">
-										<img src="./images/hyperv/delete-vm.png" alt="Delete VM">
+										<img src="./images/hyperv/step 40.png" alt="Turn off VM">
+										<img src="./images/hyperv/step 41.png" alt="Delete VM">
 									</div>
 								</div>
 							</article>
 							<!-- Add more deletion steps -->
 						</div>
+					
 					</section>
 				</div>
 			</div>
