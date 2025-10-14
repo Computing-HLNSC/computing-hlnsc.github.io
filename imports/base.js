@@ -10,23 +10,6 @@ fetch("../imports/header.html")
 	document.getElementById("header").innerHTML = data;
 });
 
-fetch("../imports/head.html")
-  .then(r => r.text())
-  .then(html => {
-    // Inject head content
-    document.getElementById("head").innerHTML = html;
-
-    // Execute any script tags manually
-    const temp = document.createElement("div");
-    temp.innerHTML = html;
-    temp.querySelectorAll("script").forEach(oldScript => {
-      const newScript = document.createElement("script");
-      if (oldScript.src) newScript.src = oldScript.src;
-      else newScript.textContent = oldScript.textContent;
-      document.head.appendChild(newScript);
-    });
-});
-
 const currentPage = window.location.pathname.split("/").pop();
 
 if (currentPage === "index.html" || currentPage === "") {
