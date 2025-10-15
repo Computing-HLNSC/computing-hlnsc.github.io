@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Computing Department | Cisco Networking Academy</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="../styles/tooltip.css">
+</head>
+
+<body class="bg-[#0D3B66] font-sans">
+	<div id="header"></div>
+	<div id="imodal"></div>
+
+	<section class="py-3">
+		<div class="container mx-auto px-4">
+			<div class="bg-white shadow-lg rounded-lg p-6">
+				<h2 class="text-l font-bold mb-4 p-2">
+					<a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+					<a class="bg-gray-200 p-2">DJI Ryze Tello Drone</a>
+				</h2>
+				<hr><br>
+				<!-- Chapter Nav -->
+				<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b mb-4">
+					<div class="flex flex-wrap gap-2 p-3">
+						<a href="#chapter-one" data-chapter-link="chapter-one" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter One</a>
+						<a href="#chapter-two" data-chapter-link="chapter-two" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter Two</a>
+						<a href="#chapter-three" data-chapter-link="chapter-three" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter Three</a>
+						<a href="#chapter-four" data-chapter-link="chapter-four" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter Four</a>
+					</div>
+				</nav>
+
+				<!-- Global Step Controls (re-used per chapter) -->
+				<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+					<div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
+						<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
+						<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
+					</div>
+					<div id="singleControls" class="hidden items-center gap-2">
+						<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 1</span>
+						<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
+						<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
+					</div>
+				</div>
+
+				<div id="chapters" class="">
+					<!-- Chapter 1:  -->
+					<section class="chapter" id="chapter-one" data-chapter="chapter-one">
+						<div id="stepsWrapper-chapter-one" class="">
+							<!-- Article Steps Here -->
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-1 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">The DJI Ryze Tello Drone</h3>
+										<p class="text-gray-700 mb-4">The DJI/Ryze Tello is a small, lightweight quadcopter drone built for educational use.<br><br>The drone is controlled either through a remote controller/phone app or programmable through its wifi connection and a language like Python or Scratch.</p>
+
+										<div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+											<h4 class="font-bold text-red-700 mb-1">Important</h4>
+											<p class="text-red-800 text-sm">Whilst these drones are small, you should still observe drone safety.</p>
+										</div><br>
+
+										<div class="bg-yellow-100 border-l-4 border-yellow-500 p-4 rounded">
+											<h4 class="font-bold text-yellow-700 mb-1">Requirements</h4>
+											<p class="text-yellow-800 text-sm">1. Laptop or Computer with Wifi capability.<br>2. Python installed<br>3. Integrated development environment (IDE)<br>4. djitellopy Python library installed<br><br>Thonny is the IDE used in this guide.</p>
+										</div>
+									</div>
+								</div>
+							</article>
+							
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Boilerplate</h3>
+										<p class="text-gray-700 mb-4">The code to the right will get your drone off the ground.<br><br>You need to ensure the drone is turned on, and you are connected on the device to the drones wifi network.<br><br>The SSID is on the top of the drone.</p>
+
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="../guides/images/dji tello/boilerplate.png" alt="Drone">
+										<br>
+										This boilerplate code will get your drone connected and off the ground.
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Moving the drone</h3>
+										<p class="text-gray-700 mb-4">The drone has the ability to go left, right, forward, backwards, up, down.<br><br>Using the code on the right, you can control the direction of flight.<br><br>You need to pass in a distance argument ( 0 - 500 ).</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="../guides/images/dji tello/movement.png" alt="Drone">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Getting the battery percentage</h3>
+										<p class="text-gray-700 mb-4">The drone has a small capacity battery. We should keep an eye on it's level as some movements and instructions require a good amount of battery (50% +).</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<img src="../guides/images/dji tello/get_battery.png" alt="Drone">
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Additional Commands</h3>
+										<p class="text-gray-700 mb-4">
+											<br>drone.move_up(30) → Go up 30 cm<br>drone.move_down(20) → Go down 20 cm<br>drone.move_left(40) → Go left 40 cm
+											<br>drone.move_right(40) → Go right 40 cm<br><br>drone.move_forward(100) → Fly forward 1 metre<br>drone.move_back(100) → Fly backwards 1 metre<br>
+											<br>drone.rotate_clockwise(90) → Spin right 90°<br>drone.rotate_counter_clockwise(180) → Spin left 180°<br><br>drone.flip_left() → Flip left
+											<br>drone.flip_right() → Flip right<br>drone.flip_forward() → Flip forward<br>drone.flip_back() → Flip backwards<br><br>drone.stop() → Hover in place
+											<br>drone.emergency() → Immediate stop (motors off – last resort)<br><br>drone.get_battery() → Show battery level (%)<br>drone.get_height() → Show current height (cm)<br>drone.get_flight_time() → Show how long it has been flying (seconds)</p>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										<div class="bg-blue-100 border-l-4 border-blue-500 p-4 rounded">
+											<h4 class="font-bold text-blue-700 mb-1">Documentation</h4>
+											<p class="text-blue-800 text-sm">https://djitellopy.readthedocs.io/en/latest/tello/</p>
+										</div>
+									</div>
+								</div>
+							</article>
+
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-1 gap-6 items-start">
+									<div>
+										<h3 class="text-xl font-semibold mb-2">Tasks</h3>
+										<p class="text-gray-700 mb-4">You should get the drone moving around.<br><br><b>You could utilise:</b><br>1. Variables<br>2. IF Statements<br>3. Loops (While and For)<br>4. Functions (User-defined and pre-defined)</p>
+
+										<div class="bg-blue-100 border-l-4 border-blue-500 p-4 rounded">
+											<h4 class="font-bold text-blue-700 mb-1">Task 1</h4>
+											<p class="text-blue-800 text-sm">Write a program which makes the drone.<br><br>Take off, move up 30cm, move right 30cm, land</p>
+										</div><br>
+										<div class="bg-blue-100 border-l-4 border-blue-500 p-4 rounded">
+											<h4 class="font-bold text-blue-700 mb-1">Task 2</h4>
+											<p class="text-blue-800 text-sm">Write a program which makes the drone.<br><br>Take off, spin 360^o then land.<br>Fly in a square path<br>Use a variable to store distance.</p>
+										</div><br>
+
+									</div>
+								</div>
+							</article>
+						</div>
+					</section>
+					<!-- Chapter 2:  -->
+					<section class="chapter hidden" id="chapter-two" data-chapter="chapter-two">
+						<div id="stepsWrapper-chapter-two" class="">
+							<!-- Article Steps Here -->
+						</div>
+					</section>
+
+					<!-- Chapter 3:  -->
+					<section class="chapter hidden" id="chapter-three" data-chapter="chapter-three">
+						<div id="stepsWrapper-chapter-three" class="">
+							<!-- Article Steps Here -->
+						</div>
+					</section>
+
+					<!-- Chapter 4:  -->
+					<section class="chapter hidden" id="chapter-four" data-chapter="chapter-four">
+						<div id="stepsWrapper-chapter-four" class="">
+							<!-- Article Steps Here -->
+						</div>
+					
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+<script src="../imports/imodal.js"></script> <!-- Js for the contact/info/turnitinuk buttons -->
+<script src="../imports/base.js"></script> <!-- Js for the header and modal imports -->
+<script>
+(function() {
+	// --- CHAPTER SWITCHING ---
+	const chapterLinks = document.querySelectorAll('[data-chapter-link]');
+	const chapters = Array.from(document.querySelectorAll('.chapter'));
+
+	function setActiveChapter(id, pushHash = true) {
+		chapters.forEach(ch => ch.classList.toggle('hidden', ch.id !== id));
+		chapterLinks.forEach(a => {
+		const active = a.getAttribute('data-chapter-link') === id;
+			a.classList.toggle('bg-blue-50', active);
+			a.classList.toggle('border-blue-500', active);
+			a.classList.toggle('text-blue-700', active);
+		});
+		localStorage.setItem('hypervChapter', id);
+		if (pushHash) location.hash = id;
+
+		// Scroll to top smoothly when changing chapter
+		window.scrollTo(0,0);
+
+		// Re-scope steps to the newly active chapter
+		initStepsForCurrentChapter();
+	}
+
+
+	chapterLinks.forEach(a => {
+		a.addEventListener('click', (e) => {
+			// Allow normal anchor behavior but still drive state
+			const id = a.getAttribute('data-chapter-link');
+			setActiveChapter(id);
+		});
+	});
+
+	function getInitialChapter() {
+		const fromHash = location.hash.replace('#', '').trim();
+		if (fromHash && document.getElementById(fromHash)) return fromHash;
+		const saved = localStorage.getItem('hypervChapter');
+		if (saved && document.getElementById(saved)) return saved;
+		return 'chapter-one';
+	}
+
+	window.addEventListener('hashchange', () => {
+		const id = location.hash.replace('#', '').trim();
+		if (id && document.getElementById(id)) setActiveChapter(id, false);
+	});
+
+	// --- STEPS (scoped to current chapter) ---
+	const viewAllBtn = document.getElementById('viewAllBtn');
+	const viewSingleBtn = document.getElementById('viewSingleBtn');
+	const singleControls = document.getElementById('singleControls');
+	const stepCounter = document.getElementById('stepCounter');
+	const prevStep = document.getElementById('prevStep');
+	const nextStep = document.getElementById('nextStep');
+
+	let singleMode = true;
+	let idx = 0;
+	let currentSteps = [];
+
+	function stopMedia(el) {
+		el.querySelectorAll('iframe').forEach(f => f.src = f.src);
+		el.querySelectorAll('video').forEach(v => v.pause());
+	}
+
+	function renderSteps() {
+		const total = currentSteps.length || 0;
+
+		if (!singleMode) {
+			currentSteps.forEach(s => {
+				s.classList.remove('hidden');
+				s.setAttribute('aria-expanded', 'true');
+			});
+			singleControls.classList.add('hidden');
+			viewAllBtn.classList.add('bg-gray-100');
+			viewSingleBtn.classList.remove('bg-gray-100');
+			return;
+		}
+
+		currentSteps.forEach((s, i) => {
+			if (i === idx) {
+				s.classList.remove('hidden');
+				s.setAttribute('aria-expanded', 'true');
+			} else {
+				stopMedia(s);
+				s.classList.add('hidden');
+				s.setAttribute('aria-expanded', 'false');
+			}
+		});
+
+		singleControls.classList.remove('hidden');
+		stepCounter.textContent = `Step ${Math.min(idx+1,total)} of ${total || 1}`;
+		viewAllBtn.classList.remove('bg-gray-100');
+		viewSingleBtn.classList.add('bg-gray-100');
+	}
+
+	function initStepsForCurrentChapter() {
+		const active = document.querySelector('.chapter:not(.hidden)');
+		currentSteps = active ? Array.from(active.querySelectorAll('[data-step]')) : [];
+		idx = 0;
+		renderSteps();
+	}
+
+	// Controls
+	viewAllBtn.addEventListener('click', () => {
+		singleMode = false;
+		renderSteps();
+	});
+	viewSingleBtn.addEventListener('click', () => {
+		singleMode = true;
+		renderSteps();
+	});
+	prevStep.addEventListener('click', () => {
+		if (!currentSteps.length) return;
+		idx = (idx - 1 + currentSteps.length) % currentSteps.length;
+		renderSteps();
+	});
+	nextStep.addEventListener('click', () => {
+		if (!currentSteps.length) return;
+		idx = (idx + 1) % currentSteps.length;
+		renderSteps();
+	});
+
+	// INIT
+	setActiveChapter(getInitialChapter(), false);
+})();
+</script>
+
+</html>
