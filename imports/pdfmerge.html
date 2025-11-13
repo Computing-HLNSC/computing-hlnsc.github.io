@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>PDF Merger</title>
+
+<style>
+  #fileList {
+    list-style: none;
+    padding: 0;
+    width: 300px;
+  }
+  #fileList li {
+    padding: 8px;
+    margin: 4px 0;
+    background: #eee;
+    border: 1px solid #ccc;
+    cursor: grab;
+  }
+  #fileList li.dragging {
+    opacity: 0.4;
+  }
+</style>
+
+</head>
+<body>
+
+<input type="file" id="pdfs" multiple accept="application/pdf">
+<ul id="fileList"></ul>
+
+<button id="mergeBtn">Merge PDFs</button>
+
+<script type="module">
+import { PDFDocument } from "./pdf_merging/pdf-lib.esm.min.js";
+
+const fileInput = document.getElementById("pdfs");
+const fileList = document.getElementById("fileList");
+let filesArray = [];
+
+fileInput.onchange = () => {
+  filesArray = Array.from(fileInput.files);  
+  renderList();
+};
+
+function renderList() {
+  fileList.innerHTML = "";
+  filesArray.forEach((file, index) => {
+    const li = document.createElement("li");
+    li.textContent = file.name;
+    li.draggable = true;
+    li.dataset.index = index;
+
+    li.addEventListener("dragstart", dragStart);
+    li.addEventListener("dragover", dragOver);
+    li.addEventListener("drop", drop);
+    li.addEventListener("dragend", dragEnd);
+
+    fileList.appendChild(li);
+  });
+}
+
+let draggedIndex = null;
+
+function dragStart(e) {
+  draggedIndex = +this.dataset.index;
+  this.classList.add("dragging");
+}
+
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function drop(e) {
+  e.preventDefault();
+  const targetIndex = +this.dataset.index;
+
+  const draggedItem = filesArray[draggedIndex];
+  filesArray.splice(draggedIndex, 1);
+  filesArray.splice(targetIndex, 0, draggedItem);
+
+  renderList();
+}
+
+function dragEnd() {
+  this.classList.remove("dragging");
+}
+
+document.getElementById("mergeBtn").onclick = async () => {
+  if (!filesArray.length) return alert("No files selected.");
+
+  const mergedPdf = await PDFDocument.create();
+
+  for (const file of filesArray) {
+    const bytes = await file.arrayBuffer();
+    const pdf = await PDFDocument.load(bytes);
+    const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+    pages.forEach(p => mergedPdf.addPage(p));
+  }
+
+  const mergedBytes = await mergedPdf.save();
+  const blob = new Blob([mergedBytes], { type: "application/pdf" });
+
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "merged.pdf";
+  link.click();
+};
+</script>
+
+</body>
+</html>

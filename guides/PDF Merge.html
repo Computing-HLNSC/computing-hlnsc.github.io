@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head id="head">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Computing Department | Cisco Networking Academy</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<link rel="stylesheet" href="../styles/tooltip.css">
+	<style>
+	#fileList {
+		list-style: none;
+		padding: 0;
+		width: 300px;
+	}
+	#fileList li {
+		padding: 8px;
+		margin: 4px 0;
+		background: #eee;
+		border: 1px solid #ccc;
+		cursor: grab;
+	}
+	#fileList li.dragging {
+		opacity: 0.4;
+	}
+	</style>
+</head>
+
+<body class="bg-[#0D3B66] font-sans">
+	<div id="header"></div>
+	<div id="imodal"></div>
+
+	<section class="py-3">
+		<div class="container mx-auto px-4">
+			<div class="bg-white shadow-lg rounded-lg p-6">
+				<h2 class="text-l font-bold mb-4 p-2">
+					<a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+					<a class="bg-gray-200 p-2">PDF Merge</a>
+				</h2>
+				<hr><br>
+				<!-- Chapter Nav 
+				<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b mb-4">
+					<div class="flex flex-wrap gap-2 p-3">
+						<a href="#chapter-one" data-chapter-link="chapter-one" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter One</a>
+						<a href="#chapter-two" data-chapter-link="chapter-two" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter Two</a>
+						<a href="#chapter-three" data-chapter-link="chapter-three" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter Three</a>
+						<a href="#chapter-four" data-chapter-link="chapter-four" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Chapter Four</a>
+					</div>
+				</nav>-->
+
+				<!-- Global Step Controls (re-used per chapter) 
+				<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+					<div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
+						<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
+						<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
+					</div>
+					<div id="singleControls" class="hidden items-center gap-2">
+						<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 1</span>
+						<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
+						<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
+					</div>
+				</div>-->
+
+				<div id="chapters" class="">
+					<!-- Chapter 1:  -->
+					<section class="chapter" id="chapter-one" data-chapter="chapter-one">
+						<div id="stepsWrapper-chapter-one" class="">
+							<!-- Article Steps Here -->	
+							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="4" aria-expanded="true">
+								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+									<div>
+										<label class="block mb-3">
+											<input 
+												type="file" 
+												id="pdfs" 
+												multiple 
+												accept="application/pdf"
+												class="mt-2 block w-full text-sm text-gray-700
+													file:mr-4 file:py-2 file:px-4 
+													file:rounded-md file:border-0
+													file:text-sm file:font-medium
+													file:bg-blue-100 file:text-blue-700
+													hover:file:bg-blue-200
+													cursor-pointer">
+										</label>
+										<ul id="fileList"></ul>
+										<button 
+											id="mergeBtn" 
+											class="mt-4 px-8 py-3 text-lg font-semibold 
+												bg-blue-600 text-white rounded-lg 
+												shadow hover:bg-blue-700 
+												transition-all duration-200">
+											Download Merged PDF
+										</button>
+
+										<script type="module">
+										import { PDFDocument } from "../imports/pdf_merging/pdf-lib.esm.min.js";
+
+										const fileInput = document.getElementById("pdfs");
+										const fileList = document.getElementById("fileList");
+										let filesArray = [];
+
+										fileInput.onchange = () => {
+										filesArray = Array.from(fileInput.files);  
+										renderList();
+										};
+
+										function renderList() {
+										fileList.innerHTML = "";
+										filesArray.forEach((file, index) => {
+											const li = document.createElement("li");
+											li.textContent = file.name;
+											li.draggable = true;
+											li.dataset.index = index;
+
+											li.addEventListener("dragstart", dragStart);
+											li.addEventListener("dragover", dragOver);
+											li.addEventListener("drop", drop);
+											li.addEventListener("dragend", dragEnd);
+
+											fileList.appendChild(li);
+										});
+										}
+
+										let draggedIndex = null;
+
+										function dragStart(e) {
+										draggedIndex = +this.dataset.index;
+										this.classList.add("dragging");
+										}
+
+										function dragOver(e) {
+										e.preventDefault();
+										}
+
+										function drop(e) {
+										e.preventDefault();
+										const targetIndex = +this.dataset.index;
+
+										const draggedItem = filesArray[draggedIndex];
+										filesArray.splice(draggedIndex, 1);
+										filesArray.splice(targetIndex, 0, draggedItem);
+
+										renderList();
+										}
+
+										function dragEnd() {
+										this.classList.remove("dragging");
+										}
+
+										document.getElementById("mergeBtn").onclick = async () => {
+										if (!filesArray.length) return alert("No files selected.");
+
+										const mergedPdf = await PDFDocument.create();
+
+										for (const file of filesArray) {
+											const bytes = await file.arrayBuffer();
+											const pdf = await PDFDocument.load(bytes);
+											const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+											pages.forEach(p => mergedPdf.addPage(p));
+										}
+
+										const mergedBytes = await mergedPdf.save();
+										const blob = new Blob([mergedBytes], { type: "application/pdf" });
+
+										const link = document.createElement("a");
+										link.href = URL.createObjectURL(blob);
+										link.download = "merged.pdf";
+										link.click();
+										};
+										</script>
+									</div>
+									<div class="bg-gray-100 border rounded-lg p-3">
+										When you have uploaded your PDFs to merge, you can then reorder them before downloading.
+									</div>
+								</div>
+							</article>
+						</div>
+					</section>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+
+<script src="../imports/imodal.js"></script> <!-- Js for the contact/info/turnitinuk buttons -->
+<script src="../imports/base.js"></script> <!-- Js for the header and modal imports -->
+<script>
+(function() {
+	// --- CHAPTER SWITCHING ---
+	const chapterLinks = document.querySelectorAll('[data-chapter-link]');
+	const chapters = Array.from(document.querySelectorAll('.chapter'));
+
+	function setActiveChapter(id, pushHash = true) {
+		chapters.forEach(ch => ch.classList.toggle('hidden', ch.id !== id));
+		chapterLinks.forEach(a => {
+		const active = a.getAttribute('data-chapter-link') === id;
+			a.classList.toggle('bg-blue-50', active);
+			a.classList.toggle('border-blue-500', active);
+			a.classList.toggle('text-blue-700', active);
+		});
+		localStorage.setItem('hypervChapter', id);
+		if (pushHash) location.hash = id;
+
+		// Scroll to top smoothly when changing chapter
+		window.scrollTo(0,0);
+
+		// Re-scope steps to the newly active chapter
+		initStepsForCurrentChapter();
+	}
+
+
+	chapterLinks.forEach(a => {
+		a.addEventListener('click', (e) => {
+			// Allow normal anchor behavior but still drive state
+			const id = a.getAttribute('data-chapter-link');
+			setActiveChapter(id);
+		});
+	});
+
+	function getInitialChapter() {
+		const fromHash = location.hash.replace('#', '').trim();
+		if (fromHash && document.getElementById(fromHash)) return fromHash;
+		const saved = localStorage.getItem('hypervChapter');
+		if (saved && document.getElementById(saved)) return saved;
+		return 'chapter-one';
+	}
+
+	window.addEventListener('hashchange', () => {
+		const id = location.hash.replace('#', '').trim();
+		if (id && document.getElementById(id)) setActiveChapter(id, false);
+	});
+
+	// --- STEPS (scoped to current chapter) ---
+	const viewAllBtn = document.getElementById('viewAllBtn');
+	const viewSingleBtn = document.getElementById('viewSingleBtn');
+	const singleControls = document.getElementById('singleControls');
+	const stepCounter = document.getElementById('stepCounter');
+	const prevStep = document.getElementById('prevStep');
+	const nextStep = document.getElementById('nextStep');
+
+	let singleMode = true;
+	let idx = 0;
+	let currentSteps = [];
+
+	function stopMedia(el) {
+		el.querySelectorAll('iframe').forEach(f => f.src = f.src);
+		el.querySelectorAll('video').forEach(v => v.pause());
+	}
+
+	function renderSteps() {
+		const total = currentSteps.length || 0;
+
+		if (!singleMode) {
+			currentSteps.forEach(s => {
+				s.classList.remove('hidden');
+				s.setAttribute('aria-expanded', 'true');
+			});
+			singleControls.classList.add('hidden');
+			viewAllBtn.classList.add('bg-gray-100');
+			viewSingleBtn.classList.remove('bg-gray-100');
+			return;
+		}
+
+		currentSteps.forEach((s, i) => {
+			if (i === idx) {
+				s.classList.remove('hidden');
+				s.setAttribute('aria-expanded', 'true');
+			} else {
+				stopMedia(s);
+				s.classList.add('hidden');
+				s.setAttribute('aria-expanded', 'false');
+			}
+		});
+
+		singleControls.classList.remove('hidden');
+		stepCounter.textContent = `Step ${Math.min(idx+1,total)} of ${total || 1}`;
+		viewAllBtn.classList.remove('bg-gray-100');
+		viewSingleBtn.classList.add('bg-gray-100');
+	}
+
+	function initStepsForCurrentChapter() {
+		const active = document.querySelector('.chapter:not(.hidden)');
+		currentSteps = active ? Array.from(active.querySelectorAll('[data-step]')) : [];
+		idx = 0;
+		renderSteps();
+	}
+
+	// Controls
+	viewAllBtn.addEventListener('click', () => {
+		singleMode = false;
+		renderSteps();
+	});
+	viewSingleBtn.addEventListener('click', () => {
+		singleMode = true;
+		renderSteps();
+	});
+	prevStep.addEventListener('click', () => {
+		if (!currentSteps.length) return;
+		idx = (idx - 1 + currentSteps.length) % currentSteps.length;
+		renderSteps();
+	});
+	nextStep.addEventListener('click', () => {
+		if (!currentSteps.length) return;
+		idx = (idx + 1) % currentSteps.length;
+		renderSteps();
+	});
+
+	// INIT
+	setActiveChapter(getInitialChapter(), false);
+})();
+</script>
+
+</html>
