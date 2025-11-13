@@ -1,167 +1,186 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head id="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computing Department | Cisco Networking Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/tooltip.css">
+    <style>
+      #fileList {
+        list-style: none;
+        padding: 0;
+        width: 300px;
+      }
 
-<head id="head">
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Computing Department | Cisco Networking Academy</title>
-	<script src="https://cdn.tailwindcss.com"></script>
-	<link rel="stylesheet" href="../styles/tooltip.css">
-	<style>
-	#fileList {
-		list-style: none;
-		padding: 0;
-		width: 300px;
-	}
-	#fileList li {
-		padding: 8px;
-		margin: 4px 0;
-		background: #eee;
-		border: 1px solid #ccc;
-		cursor: grab;
-	}
-	#fileList li.dragging {
-		opacity: 0.4;
-	}
-	</style>
-</head>
+      #fileList li {
+        padding: 8px;
+        margin: 4px 0;
+        background: #eee;
+        border: 1px solid #ccc;
+        cursor: grab;
+      }
 
-<body class="bg-[#0D3B66] font-sans">
-	<div id="header"></div>
-	<div id="imodal"></div>
-
-	<section class="py-3">
-		<div class="container mx-auto px-4">
-			<div class="bg-white shadow-lg rounded-lg p-6">
-				<h2 class="text-l font-bold mb-4 p-2">
-					<a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
-					<a class="bg-gray-200 p-2">PDF Merge</a>
-				</h2>
-				<hr><br>
-
-				<div id="chapters" class="">
-					<!-- Chapter 1:  -->
-					<section class="chapter" id="chapter-one" data-chapter="chapter-one">
-						<div id="stepsWrapper-chapter-one" class="">
-							<!-- Article Steps Here -->	
-							<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="4" aria-expanded="true">
-								<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-									<div>
-										<label class="block mb-3">
-											<input 
-												type="file" 
-												id="pdfs" 
-												multiple 
-												accept="application/pdf"
-												class="mt-2 block w-full text-sm text-gray-700
+      #fileList li.dragging {
+        opacity: 0.4;
+      }
+    </style>
+  </head>
+  <body class="bg-[#0D3B66] font-sans">
+    <div id="header"></div>
+    <div id="imodal"></div>
+    <section class="py-3">
+      <div class="container mx-auto px-4">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h2 class="text-l font-bold mb-4 p-2">
+            <a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+            <a class="bg-gray-200 p-2">PDF Merge</a>
+          </h2>
+          <hr>
+          <br>
+          <div id="chapters" class="">
+            <!-- Chapter 1:  -->
+            <section class="chapter" id="chapter-one" data-chapter="chapter-one">
+              <div id="stepsWrapper-chapter-one" class="">
+                <!-- Article Steps Here -->
+                <article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="4" aria-expanded="true">
+                  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+                    <div>
+                      <label class="block mb-3">
+                        <input type="file" id="pdfs" multiple accept="application/pdf" class="mt-2 block w-full text-sm text-gray-700
 													file:mr-4 file:py-2 file:px-4 
 													file:rounded-md file:border-0
 													file:text-sm file:font-medium
 													file:bg-blue-100 file:text-blue-700
 													hover:file:bg-blue-200
 													cursor-pointer">
-										</label>
-										<ul id="fileList"></ul>
-										<button 
-											id="mergeBtn" 
-											class="mt-4 px-8 py-3 text-lg font-semibold 
+                      </label>
+                      <div id="topButtons" class="flex gap-3 mb-3 hidden">
+                        <button id="addMoreBtn" class="px-3 py-2 bg-gray-200 rounded">Add More Files</button>
+                        <button id="removeAllBtn" class="px-3 py-2 bg-red-500 text-white rounded">Remove All</button>
+                      </div>
+                      <ul id="fileList"></ul>
+                      <button id="mergeBtn" class="mt-4 px-8 py-3 text-lg font-semibold 
 												bg-blue-600 text-white rounded-lg 
 												shadow hover:bg-blue-700 
-												transition-all duration-200">
-											Download Merged PDF
-										</button>
+												transition-all duration-200"> Download Merged PDF </button>
+                      <script type="module">
+                        import {
+                          PDFDocument
+                        } from "../imports/pdf_merging/pdf-lib.esm.min.js";
+                        const fileInput = document.getElementById("pdfs");
+                        const fileList = document.getElementById("fileList");
+                        let filesArray = [];
+                        fileInput.onchange = () => {
+                          filesArray = Array.from(fileInput.files);
+                          renderList();
+                        };
+                        const addMoreBtn = document.getElementById("addMoreBtn");
+                        const removeAllBtn = document.getElementById("removeAllBtn");
+                        fileInput.onchange = () => {
+                          const newFiles = Array.from(fileInput.files);
+                          filesArray = filesArray.concat(newFiles); // APPEND instead of replace
+                          renderList();
+                        };
+                        addMoreBtn.onclick = () => {
+                          fileInput.click();
+                        };
+                        removeAllBtn.onclick = () => {
+                          filesArray = [];
+                          fileInput.value = "";
+                          renderList();
+                        };
 
-										<script type="module">
-										import { PDFDocument } from "../imports/pdf_merging/pdf-lib.esm.min.js";
+                        function renderList() {
+                          fileList.innerHTML = "";
+                          // If empty → show only the file input
+                          if (filesArray.length === 0) {
+                            document.getElementById("topButtons").classList.add("hidden");
+                            return;
+                          }
+                          // If not empty → show add/remove buttons
+                          document.getElementById("topButtons").classList.remove("hidden");
+                          filesArray.forEach((file, index) => {
+                            const li = document.createElement("li");
+                            li.draggable = true;
+                            li.dataset.index = index;
+                            const wrapper = document.createElement("div");
+                            wrapper.classList.add("flex", "justify-between", "items-center");
+                            const nameSpan = document.createElement("span");
+                            nameSpan.textContent = file.name;
+                            const delBtn = document.createElement("button");
+                            delBtn.textContent = "✖";
+                            delBtn.classList.add("text-red-600", "font-bold", "ml-3");
+                            delBtn.onclick = (e) => {
+                              e.stopPropagation();
+                              filesArray.splice(index, 1);
+                              renderList();
+                            };
+                            wrapper.appendChild(nameSpan);
+                            wrapper.appendChild(delBtn);
+                            li.appendChild(wrapper);
+                            li.addEventListener("dragstart", dragStart);
+                            li.addEventListener("dragover", dragOver);
+                            li.addEventListener("drop", drop);
+                            li.addEventListener("dragend", dragEnd);
+                            fileList.appendChild(li);
+                          });
+                        }
+                        let draggedIndex = null;
 
-										const fileInput = document.getElementById("pdfs");
-										const fileList = document.getElementById("fileList");
-										let filesArray = [];
+                        function dragStart(e) {
+                          draggedIndex = +this.dataset.index;
+                          this.classList.add("dragging");
+                        }
 
-										fileInput.onchange = () => {
-										filesArray = Array.from(fileInput.files);  
-										renderList();
-										};
+                        function dragOver(e) {
+                          e.preventDefault();
+                        }
 
-										function renderList() {
-										fileList.innerHTML = "";
-										filesArray.forEach((file, index) => {
-											const li = document.createElement("li");
-											li.textContent = file.name;
-											li.draggable = true;
-											li.dataset.index = index;
+                        function drop(e) {
+                          e.preventDefault();
+                          const targetIndex = +this.dataset.index;
+                          const draggedItem = filesArray[draggedIndex];
+                          filesArray.splice(draggedIndex, 1);
+                          filesArray.splice(targetIndex, 0, draggedItem);
+                          renderList();
+                        }
 
-											li.addEventListener("dragstart", dragStart);
-											li.addEventListener("dragover", dragOver);
-											li.addEventListener("drop", drop);
-											li.addEventListener("dragend", dragEnd);
-
-											fileList.appendChild(li);
-										});
-										}
-
-										let draggedIndex = null;
-
-										function dragStart(e) {
-										draggedIndex = +this.dataset.index;
-										this.classList.add("dragging");
-										}
-
-										function dragOver(e) {
-										e.preventDefault();
-										}
-
-										function drop(e) {
-										e.preventDefault();
-										const targetIndex = +this.dataset.index;
-
-										const draggedItem = filesArray[draggedIndex];
-										filesArray.splice(draggedIndex, 1);
-										filesArray.splice(targetIndex, 0, draggedItem);
-
-										renderList();
-										}
-
-										function dragEnd() {
-										this.classList.remove("dragging");
-										}
-
-										document.getElementById("mergeBtn").onclick = async () => {
-										if (!filesArray.length) return alert("No files selected.");
-
-										const mergedPdf = await PDFDocument.create();
-
-										for (const file of filesArray) {
-											const bytes = await file.arrayBuffer();
-											const pdf = await PDFDocument.load(bytes);
-											const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
-											pages.forEach(p => mergedPdf.addPage(p));
-										}
-
-										const mergedBytes = await mergedPdf.save();
-										const blob = new Blob([mergedBytes], { type: "application/pdf" });
-
-										const link = document.createElement("a");
-										link.href = URL.createObjectURL(blob);
-										link.download = "merged.pdf";
-										link.click();
-										};
-										</script>
-									</div>
-									<div class="bg-gray-100 border rounded-lg p-3">
-										When you have uploaded your PDFs to merge, you can then reorder them before downloading.
-									</div>
-								</div>
-							</article>
-						</div>
-					</section>
-				</div>
-			</div>
-		</div>
-	</section>
-</body>
-
-<script src="../imports/imodal.js"></script> <!-- Js for the contact/info/turnitinuk buttons -->
-<script src="../imports/base.js"></script> <!-- Js for the header and modal imports -->
-
+                        function dragEnd() {
+                          this.classList.remove("dragging");
+                        }
+                        document.getElementById("mergeBtn").onclick = async () => {
+                          if (!filesArray.length) return alert("No files selected.");
+                          const mergedPdf = await PDFDocument.create();
+                          for (const file of filesArray) {
+                            const bytes = await file.arrayBuffer();
+                            const pdf = await PDFDocument.load(bytes);
+                            const pages = await mergedPdf.copyPages(pdf, pdf.getPageIndices());
+                            pages.forEach(p => mergedPdf.addPage(p));
+                          }
+                          const mergedBytes = await mergedPdf.save();
+                          const blob = new Blob([mergedBytes], {
+                            type: "application/pdf"
+                          });
+                          const link = document.createElement("a");
+                          link.href = URL.createObjectURL(blob);
+                          link.download = "merged.pdf";
+                          link.click();
+                        };
+                      </script>
+                    </div>
+                    <div class="bg-gray-100 border rounded-lg p-3"> When you have uploaded your PDFs to merge, you can then reorder them before downloading. </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="../imports/imodal.js"></script>
+  <!-- Js for the contact/info/turnitinuk buttons -->
+  <script src="../imports/base.js"></script>
+  <!-- Js for the header and modal imports -->
 </html>
