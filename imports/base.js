@@ -25,9 +25,9 @@ if (currentPage === "index.html" || currentPage === "") {
 		document.getElementById("index_academic_courses").innerHTML = data;
 	});
 
-	fetch("../imports/index_cisco_courses.html")
+	fetch("../imports/index_tools.html")
 	.then(response => response.text())
 	.then(data => {
-		document.getElementById("index_cisco_courses").innerHTML = data;
+		document.getElementById("index_tools").innerHTML = data;
 	});
 }
