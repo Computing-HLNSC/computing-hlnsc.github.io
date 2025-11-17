@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head id="head">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Computing Department | Cisco Networking Academy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="../styles/tooltip.css">
+    <style>
+      .fontstyling {
+        font-family: Impact, Charcoal, sans-serif;
+        font-size: 31px;
+        letter-spacing: 0px;
+        word-spacing: 2px;
+        color: #000000;
+        font-weight: 400;
+        text-decoration: none;
+        font-style: normal;
+        font-variant: small-caps;
+        text-transform: none;
+      }
+
+      :root {
+        --bg: #f5f5f5;
+        --text: #000;
+        --card: #fff;
+      }
+
+      h1 {
+        margin-bottom: 15px;
+      }
+
+      .controls {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+
+      input,
+      select,
+      button {
+        padding: 10px;
+        font-size: 14px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+      }
+
+      .feed-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .post {
+        background: var(--card);
+        padding: 15px;
+        border-radius: 6px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.15);
+      }
+
+      .post h3 {
+        margin: 0 0 5px;
+        font-size: 18px;
+      }
+
+      .post small {
+        display: block;
+        color: #888;
+      }
+
+      .summary {
+        margin-top: 10px;
+        display: none;
+      }
+
+      .toggle-summary {
+        margin-top: 10px;
+        cursor: pointer;
+        color: #0077ff;
+      }
+
+      /* Loading Spinner */
+      .spinner {
+        margin: 80px auto;
+        width: 50px;
+        height: 50px;
+        border: 6px solid #ccc;
+        border-top: 6px solid #0077ff;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* Pagination */
+      .pagination {
+        margin-top: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .vis_button {
+        padding: 10px 20px;
+        font-size: 16px;
+        margin: 5px;
+        border: solid 1px;
+      }
+
+      .vis_button:hover {
+        background: rgba(0, 0, 0, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-[#0D3B66] font-sans">
+    <div id="header"></div>
+    <div id="imodal"></div>
+    <section class="py-3">
+      <div class="container mx-auto px-4">
+        <div class="bg-white shadow-lg rounded-lg p-6">
+          <h2 class="text-l font-bold mb-4 p-2">
+            <a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+            <a class="bg-gray-200 p-2">Cyber Updates (RSS)</a>
+          </h2>
+          <hr>
+          <br>
+          <h2 class="fontstyling" style="text-align: center;">Cyber Security Updates</h2>
+          <div class="controls">
+            <input id="search" type="text" placeholder="Search posts…">
+            <select id="sourceFilter">
+              <option value="all">All Sources</option>
+              <option value="bleeping">BleepingComputer</option>
+              <option value="ncsc">NCSC</option>
+            </select>
+          </div>
+          <div id="loader" class="spinner"></div>
+          <div id="feed" class="feed-container" style="display:none;"></div>
+          <div class="pagination">
+            <button id="prev" class="vis_button">Previous</button>
+            <button id="next" class="vis_button">Next</button>
+          </div>
+          <script>
+            // --- CONFIG ---
+            const feeds = [{
+              url: "https://www.bleepingcomputer.com/feed/",
+              id: "bleeping"
+            }, {
+              url: "https://www.ncsc.gov.uk/api/1/services/v1/all-rss-feed.xml",
+              id: "ncsc"
+            }];
+            // --- GLOBAL STATE ---
+            let allItems = [];
+            let filtered = [];
+            let currentPage = 1;
+            const perPage = 10;
+            // --- FETCH FUNCTIONS ---
+            async function fetchFeed(url) {
+              const apiURL = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+              const res = await fetch(apiURL);
+              const data = await res.json();
+              return new window.DOMParser().parseFromString(data.contents, "text/xml");
+            }
+            async function loadFeeds() {
+              for (const f of feeds) {
+                try {
+                  const xml = await fetchFeed(f.url);
+                  const posts = [...xml.querySelectorAll("item")];
+                  posts.forEach(p => {
+                    allItems.push({
+                      title: p.querySelector("title")?.textContent ?? "No title",
+                      link: p.querySelector("link")?.textContent ?? "",
+                      pubDate: new Date(p.querySelector("pubDate")?.textContent ?? 0),
+                      description: p.querySelector("description")?.textContent ?? "",
+                      source: f.id
+                    });
+                  });
+                } catch (e) {
+                  console.error("Feed error:", f.url, e);
+                }
+              }
+              allItems.sort((a, b) => b.pubDate - a.pubDate);
+              filtered = [...allItems];
+              document.getElementById("loader").style.display = "none";
+              document.getElementById("feed").style.display = "flex";
+              render();
+            }
+            // --- FILTERING & SEARCH ---
+            function applyFilters() {
+              const term = document.getElementById("search").value.toLowerCase();
+              const source = document.getElementById("sourceFilter").value;
+              filtered = allItems.filter(p => {
+                const matchesTerm = p.title.toLowerCase().includes(term) || p.description.toLowerCase().includes(term);
+                const matchesSource = source === "all" || p.source === source;
+                return matchesTerm && matchesSource;
+              });
+              currentPage = 1;
+              render();
+            }
+            // --- PAGINATION ---
+            function paginate(items) {
+              const start = (currentPage - 1) * perPage;
+              return items.slice(start, start + perPage);
+            }
+            // --- DISPLAY ---
+            function render() {
+              const container = document.getElementById("feed");
+              container.innerHTML = "";
+              const pageItems = paginate(filtered);
+              pageItems.forEach(item => {
+                const div = document.createElement("div");
+                div.className = "post";
+                div.innerHTML = `
+            
+												<h3>
+													<a href="${item.link}" target="_blank">${item.title}</a>
+												</h3>
+												<small>${item.pubDate.toLocaleString()}</small>
+												<small>
+													<em>Source: ${item.source}</em>
+												</small>
+												<div class="toggle-summary">Show Summary</div>
+												<div class="summary">${item.description}</div>
+        `;
+                const toggle = div.querySelector(".toggle-summary");
+                const summary = div.querySelector(".summary");
+                toggle.addEventListener("click", () => {
+                  if (summary.style.display === "block") {
+                    summary.style.display = "none";
+                    toggle.textContent = "Show Summary";
+                  } else {
+                    summary.style.display = "block";
+                    toggle.textContent = "Hide Summary";
+                  }
+                });
+                container.appendChild(div);
+              });
+            }
+            // --- EVENT LISTENERS ---
+            document.getElementById("search").addEventListener("input", applyFilters);
+            document.getElementById("sourceFilter").addEventListener("change", applyFilters);
+            document.getElementById("prev").onclick = () => {
+              if (currentPage > 1) {
+                currentPage--;
+                render();
+              }
+            };
+            document.getElementById("next").onclick = () => {
+              if ((currentPage * perPage) < filtered.length) {
+                currentPage++;
+                render();
+              }
+            };
+            // --- INIT ---
+            loadFeeds();
+          </script>
+        </div>
+      </div>
+    </section>
+  </body>
+  <script src="../imports/imodal.js"></script>
+  <!-- Js for the contact/info/turnitinuk buttons -->
+  <script src="../imports/base.js"></script>
+  <!-- Js for the header and modal imports -->
+</html>
