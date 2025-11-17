@@ -140,359 +140,365 @@
           </h2>
           <hr>
           <br>
-          <div id="chapters" class="">
-            <!-- Chapter 1:  -->
-            <section class="chapter" id="chapter-one" data-chapter="chapter-one">
-              <div id="stepsWrapper-chapter-one" class="">
-                <div id="content">
-                  <div id="simulation">
-                    <h2 class="fontstyling" style="text-align: center;">World Map</h2>
-                    <center>
-                      <div id="map">
-                        <canvas id="canvas"></canvas>
-                        <!--<div id="coordinates-tooltip"></div>  Tooltip for coordinates -->
-                      </div>
-                    </center>
-                    <div id="controls">
-                      <button class="vis_button" onclick="toggleNodes()">Toggle Nodes</button>
-                      <button class="vis_button" onclick="toggleNetworkTraffic()">Toggle Network Traffic</button>
-                      <button class="vis_button" onclick="startSimulation()">Start Simulation</button>
-                      <button class="vis_button" onclick="resetSimulation()">Reset Simulation</button>
-                    </div>
+          <div class="bg-red-100 border-l-4 border-red-500 p-4 rounded">
+            <h4 class="font-bold text-red-700 mb-1">What is a DDOS Attack & Why It Matters</h4>
+            <p class="text-red-800 text-sm">
+              1. A DDoS attack floods a service with excessive traffic from many sources.<br>
+              2. The goal is to overwhelm the server so users cannot access it.<br>
+              3. It’s important because DDoS can shut down websites, disrupt businesses, and cause downtime.<br>
+              4. Validating traffic and using protective measures (rate-limiting, filtering, CDNs, etc.) reduces risk.<br>
+              5. Always test defences on systems you own or have permission to evaluate.
+            </p>
+          </div><br>
+          <hr>
+          <div id="stepsWrapper-chapter-one" class="">
+            <div id="content">
+              <div id="simulation">
+                <h2 class="fontstyling" style="text-align: center;">World Map</h2>
+                <center>
+                  <div id="map">
+                    <canvas id="canvas"></canvas>
+                    <!--<div id="coordinates-tooltip"></div>  Tooltip for coordinates -->
                   </div>
-                  <div id="console-container">
-                    <h2 class="fontstyling" style="text-align: center;">Network Traffic</h2>
-                    <div id="console">
-                      <div id="log"></div>
-                    </div>
-                  </div>
+                </center>
+                <div id="controls">
+                  <button class="vis_button" onclick="toggleNodes()">Toggle Nodes</button>
+                  <button class="vis_button" onclick="toggleNetworkTraffic()">Toggle Network Traffic</button>
+                  <button class="vis_button" onclick="startSimulation()">Start Simulation</button>
+                  <button class="vis_button" onclick="resetSimulation()">Reset Simulation</button>
                 </div>
-                <script>
-                  /* -------------------------
-   COORDINATE SCALING SETUP
----------------------------- */
-                  const ORIGINAL_WIDTH = 800;
-                  const ORIGINAL_HEIGHT = 500;
-
-                  function scaleCoord(x, y, mapW, mapH) {
-                    return {
-                      x: (x / ORIGINAL_WIDTH) * mapW,
-                      y: (y / ORIGINAL_HEIGHT) * mapH
-                    };
-                  }
-                  /* -------------------------
-                     ORIGINAL COORDINATES
-                  ---------------------------- */
-                  const coordinates = [{
-                    x: 32.97,
-                    y: 52.31
-                  }, {
-                    x: 121.97,
-                    y: 37.31
-                  }, {
-                    x: 287.97,
-                    y: 20.31
-                  }, {
-                    x: 411.97,
-                    y: 95.31
-                  }, {
-                    x: 401.97,
-                    y: 158.31
-                  }, {
-                    x: 247.97,
-                    y: 228.31
-                  }, {
-                    x: 253.97,
-                    y: 350.31
-                  }, {
-                    x: 168.97,
-                    y: 480.31
-                  }, {
-                    x: 703.97,
-                    y: 317.31
-                  }, {
-                    x: 761.97,
-                    y: 339.31
-                  }, {
-                    x: 693.97,
-                    y: 239.31
-                  }, {
-                    x: 610.97,
-                    y: 134.31
-                  }, {
-                    x: 630.97,
-                    y: 62.31
-                  }, {
-                    x: 798.97,
-                    y: 55.31
-                  }, {
-                    x: 462.97,
-                    y: 52.31
-                  }, {
-                    x: 471.97,
-                    y: 287.31
-                  }, {
-                    x: 220.97,
-                    y: 139.31
-                  }, {
-                    x: 132.97,
-                    y: 131.31
-                  }, {
-                    x: 496.97,
-                    y: 201.31
-                  }, {
-                    x: 670.97,
-                    y: 199.31
-                  }, ];
-                  let animationFrameId;
-                  let nodesVisible = false;
-                  let targetNode = coordinates[0];
-                  let trafficVisible = false;
-                  let trafficIntervalId;
-                  let trafficAnimations = [];
-                  /* -------------------------
-                     DRAWING HELPERS
-                  ---------------------------- */
-                  function drawLineSegment(ctx, startX, startY, endX, endY, progress) {
-                    const currentX = startX + (endX - startX) * progress;
-                    const currentY = startY + (endY - startY) * progress;
-                    ctx.beginPath();
-                    ctx.moveTo(startX, startY);
-                    ctx.lineTo(currentX, currentY);
-                    ctx.strokeStyle = 'red';
-                    ctx.lineWidth = 2;
-                    ctx.setLineDash([3, 3]);
-                    ctx.stroke();
-                    ctx.setLineDash([]);
-                  }
-                  /* -------------------------
-                     LOGGING
-                  ---------------------------- */
-                  function generatePacketDataAndInfo() {
-                    const packetTypes = ['HTTP Request', 'DNS Query', 'TCP Handshake', 'UDP Packet', 'ICMP Ping'];
-                    const sources = ['192.168.0.1', '10.0.0.2', '172.16.0.3'];
-                    const destinations = ['203.0.113.1', '203.0.113.2', '203.0.113.3'];
-                    const ports = [80, 443, 53, 123, 8080];
-                    const packetType = packetTypes[Math.floor(Math.random() * packetTypes.length)];
-                    const source = sources[Math.floor(Math.random() * sources.length)];
-                    const destination = destinations[Math.floor(Math.random() * destinations.length)];
-                    const sourcePort = ports[Math.floor(Math.random() * ports.length)];
-                    const destinationPort = ports[Math.floor(Math.random() * ports.length)];
-                    const packetSize = Math.floor(Math.random() * 1500) + 64;
-                    const latency = Math.floor(Math.random() * 100) + 1;
-                    return {
-                      packetData: `${packetType} - Size: ${packetSize} bytes, Latency: ${latency} ms`,
-                      additionalInfo: `Source: ${source}
-													<br>Destination: ${destination}
-														<br>Source Port: ${sourcePort}
-															<br>Destination Port: ${destinationPort}
-																<br>Payload Size: ${packetSize} bytes`
-                    };
-                  }
-
-                  function logTrafficEvent(startNode, endNode) {
-                    const logElement = document.getElementById('log');
-                    const {
-                      packetData,
-                      additionalInfo
-                    } = generatePacketDataAndInfo();
-                    const logMessage = `Node ${startNode} -> Node ${endNode}: ${packetData}`;
-                    const entry = document.createElement('div');
-                    entry.classList.add('tooltip');
-                    entry.textContent = logMessage;
-                    const tip = document.createElement('span');
-                    tip.classList.add('tooltiptext');
-                    tip.innerHTML = additionalInfo;
-                    entry.appendChild(tip);
-                    entry.onmousemove = e => {
-                      tip.style.top = `${e.clientY + 10}px`;
-                      tip.style.left = `${e.clientX + 10}px`;
-                    };
-                    logElement.appendChild(entry);
-                    const consoleElement = document.getElementById('console');
-                    consoleElement.scrollTop = consoleElement.scrollHeight;
-                  }
-                  /* -------------------------
-                     NODE DRAWING
-                  ---------------------------- */
-                  function drawNodes(ctx, coordinates, target) {
-                    if (!nodesVisible) return;
-                    const w = ctx.canvas.width;
-                    const h = ctx.canvas.height;
-                    coordinates.forEach(c => {
-                      const scaled = scaleCoord(c.x, c.y, w, h);
-                      ctx.beginPath();
-                      ctx.arc(scaled.x, scaled.y, 5, 0, 2 * Math.PI, false);
-                      ctx.fillStyle = 'green';
-                      ctx.fill();
-                    });
-                    const t = scaleCoord(target.x, target.y, w, h);
-                    ctx.beginPath();
-                    ctx.arc(t.x, t.y, 5, 0, 2 * Math.PI, false);
-                    ctx.fillStyle = 'orange';
-                    ctx.fill();
-                  }
-                  /* -------------------------
-                     DDOS SIMULATION
-                  ---------------------------- */
-                  function startSimulation() {
-                    if (trafficIntervalId) clearInterval(trafficIntervalId);
-                    trafficVisible = false;
-                    const logElement = document.getElementById('log');
-                    const msg = document.createElement('div');
-                    msg.textContent = "Starting DDoS Simulation...";
-                    logElement.appendChild(msg);
-                    logElement.scrollTop = logElement.scrollHeight;
-                    const map = document.getElementById('map');
-                    const canvas = document.getElementById('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = map.clientWidth;
-                    canvas.height = map.clientHeight;
-                    animateAllLines(ctx, coordinates, targetNode, 2000);
-                  }
-
-                  function animateAllLines(ctx, coords, target, duration) {
-                    const startTime = performance.now();
-
-                    function step(timestamp) {
-                      const w = ctx.canvas.width;
-                      const h = ctx.canvas.height;
-                      const scaledTarget = scaleCoord(target.x, target.y, w, h);
-                      const elapsed = timestamp - startTime;
-                      const progress = Math.min(elapsed / duration, 1);
-                      ctx.clearRect(0, 0, w, h);
-                      drawNodes(ctx, coords, target);
-                      coords.forEach(c => {
-                        const s = scaleCoord(c.x, c.y, w, h);
-                        drawLineSegment(ctx, s.x, s.y, scaledTarget.x, scaledTarget.y, progress);
-                        const startNode = coords.indexOf(c) + 1;
-                        const endNode = coords.indexOf(target) + 1;
-                        logTrafficEvent(startNode, endNode);
-                      });
-                      if (progress < 1) {
-                        animationFrameId = requestAnimationFrame(step);
-                      } else {
-                        drawNodes(ctx, coords, target);
-                        setTimeout(() => animateAllLines(ctx, coords, target, duration), 1000);
-                      }
-                    }
-                    animationFrameId = requestAnimationFrame(step);
-                  }
-                  /* -------------------------
-                     RESET / TOGGLE
-                  ---------------------------- */
-                  function resetSimulation() {
-                    const canvas = document.getElementById('canvas');
-                    const ctx = canvas.getContext('2d');
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    cancelAnimationFrame(animationFrameId);
-                    if (trafficIntervalId) clearInterval(trafficIntervalId);
-                    trafficAnimations = [];
-                    drawNodes(ctx, coordinates, targetNode);
-                  }
-
-                  function toggleNodes() {
-                    nodesVisible = !nodesVisible;
-                    const canvas = document.getElementById('canvas');
-                    const ctx = canvas.getContext('2d');
-                    ctx.clearRect(0, 0, canvas.width, canvas.height);
-                    drawNodes(ctx, coordinates, targetNode);
-                  }
-                  /* -------------------------
-                     TRAFFIC SYSTEM (SCALED)
-                  ---------------------------- */
-                  function drawTrafficLine(ctx, startX, startY, endX, endY, duration) {
-                    const startTime = performance.now();
-                    trafficAnimations.push({
-                      startX,
-                      startY,
-                      endX,
-                      endY,
-                      startTime,
-                      duration,
-                      complete: false
-                    });
-                    const startNode = coordinates.findIndex(c => scaleCoord(c.x, c.y, ctx.canvas.width, ctx.canvas.height).x === startX) + 1;
-                    const endNode = coordinates.findIndex(c => scaleCoord(c.x, c.y, ctx.canvas.width, ctx.canvas.height).x === endX) + 1;
-                    logTrafficEvent(startNode, endNode);
-                    if (trafficAnimations.length === 1) requestAnimationFrame(() => drawAllTrafficLines(ctx));
-                  }
-
-                  function drawAllTrafficLines(ctx) {
-                    const w = ctx.canvas.width;
-                    const h = ctx.canvas.height;
-                    ctx.clearRect(0, 0, w, h);
-                    drawNodes(ctx, coordinates, targetNode);
-                    trafficAnimations.forEach(a => {
-                      const elapsed = performance.now() - a.startTime;
-                      const progress = Math.min(elapsed / a.duration, 1);
-                      drawLineSegment(ctx, a.startX, a.startY, a.endX, a.endY, progress);
-                      if (progress >= 1) a.complete = true;
-                    });
-                    trafficAnimations = trafficAnimations.filter(a => !a.complete);
-                    if (trafficAnimations.length > 0) requestAnimationFrame(() => drawAllTrafficLines(ctx));
-                  }
-
-                  function generateRandomTraffic(ctx) {
-                    const n1 = coordinates[Math.floor(Math.random() * coordinates.length)];
-                    const n2 = coordinates[Math.floor(Math.random() * coordinates.length)];
-                    if (n1 === n2) return;
-                    const s = scaleCoord(n1.x, n1.y, ctx.canvas.width, ctx.canvas.height);
-                    const t = scaleCoord(n2.x, n2.y, ctx.canvas.width, ctx.canvas.height);
-                    drawTrafficLine(ctx, s.x, s.y, t.x, t.y, 1000);
-                  }
-
-                  function toggleNetworkTraffic() {
-                    trafficVisible = !trafficVisible;
-                    const canvas = document.getElementById('canvas');
-                    const ctx = canvas.getContext('2d');
-                    if (trafficVisible) {
-                      trafficIntervalId = setInterval(() => generateRandomTraffic(ctx), 250);
-                    } else {
-                      clearInterval(trafficIntervalId);
-                      resetSimulation();
-                    }
-                  }
-                  /* -------------------------
-                     INITIAL SETUP + EVENTS
-                  ---------------------------- */
-                  function initializeCanvas() {
-                    const map = document.getElementById('map');
-                    const canvas = document.getElementById('canvas');
-                    const ctx = canvas.getContext('2d');
-                    canvas.width = map.clientWidth;
-                    canvas.height = map.clientHeight;
-                    drawNodes(ctx, coordinates, targetNode);
-                    canvas.addEventListener('click', e => {
-                      const rect = canvas.getBoundingClientRect();
-                      const clickX = e.clientX - rect.left;
-                      const clickY = e.clientY - rect.top;
-                      coordinates.forEach(c => {
-                        const scaled = scaleCoord(c.x, c.y, canvas.width, canvas.height);
-                        if (Math.hypot(scaled.x - clickX, scaled.y - clickY) < 10) {
-                          targetNode = c;
-                          ctx.clearRect(0, 0, canvas.width, canvas.height);
-                          drawNodes(ctx, coordinates, targetNode);
-                        }
-                      });
-                    });
-                    canvas.addEventListener('mousemove', e => {
-                      const rect = canvas.getBoundingClientRect();
-                      const mouseX = e.clientX - rect.left;
-                      const mouseY = e.clientY - rect.top;
-                      let hit = false;
-                      coordinates.forEach(c => {
-                        const scaled = scaleCoord(c.x, c.y, canvas.width, canvas.height);
-                        if (Math.hypot(scaled.x - mouseX, scaled.y - mouseY) < 10) hit = true;
-                      });
-                      canvas.style.cursor = hit ? "crosshair" : "default";
-                    });
-                  }
-                  window.onresize = initializeCanvas;
-                  window.onload = initializeCanvas;
-                </script>
               </div>
-            </section>
+              <div id="console-container">
+                <h2 class="fontstyling" style="text-align: center;">Network Traffic</h2>
+                <div id="console">
+                  <div id="log"></div>
+                </div>
+              </div>
+            </div>
+            <script>
+              /* -------------------------
+COORDINATE SCALING SETUP
+---------------------------- */
+              const ORIGINAL_WIDTH = 800;
+              const ORIGINAL_HEIGHT = 500;
+
+              function scaleCoord(x, y, mapW, mapH) {
+                return {
+                  x: (x / ORIGINAL_WIDTH) * mapW,
+                  y: (y / ORIGINAL_HEIGHT) * mapH
+                };
+              }
+              /* -------------------------
+                  ORIGINAL COORDINATES
+              ---------------------------- */
+              const coordinates = [{
+                x: 32.97,
+                y: 52.31
+              }, {
+                x: 121.97,
+                y: 37.31
+              }, {
+                x: 287.97,
+                y: 20.31
+              }, {
+                x: 411.97,
+                y: 95.31
+              }, {
+                x: 401.97,
+                y: 158.31
+              }, {
+                x: 247.97,
+                y: 228.31
+              }, {
+                x: 253.97,
+                y: 350.31
+              }, {
+                x: 168.97,
+                y: 480.31
+              }, {
+                x: 703.97,
+                y: 317.31
+              }, {
+                x: 761.97,
+                y: 339.31
+              }, {
+                x: 693.97,
+                y: 239.31
+              }, {
+                x: 610.97,
+                y: 134.31
+              }, {
+                x: 630.97,
+                y: 62.31
+              }, {
+                x: 798.97,
+                y: 55.31
+              }, {
+                x: 462.97,
+                y: 52.31
+              }, {
+                x: 471.97,
+                y: 287.31
+              }, {
+                x: 220.97,
+                y: 139.31
+              }, {
+                x: 132.97,
+                y: 131.31
+              }, {
+                x: 496.97,
+                y: 201.31
+              }, {
+                x: 670.97,
+                y: 199.31
+              }, ];
+              let animationFrameId;
+              let nodesVisible = false;
+              let targetNode = coordinates[0];
+              let trafficVisible = false;
+              let trafficIntervalId;
+              let trafficAnimations = [];
+              /* -------------------------
+                  DRAWING HELPERS
+              ---------------------------- */
+              function drawLineSegment(ctx, startX, startY, endX, endY, progress) {
+                const currentX = startX + (endX - startX) * progress;
+                const currentY = startY + (endY - startY) * progress;
+                ctx.beginPath();
+                ctx.moveTo(startX, startY);
+                ctx.lineTo(currentX, currentY);
+                ctx.strokeStyle = 'red';
+                ctx.lineWidth = 2;
+                ctx.setLineDash([3, 3]);
+                ctx.stroke();
+                ctx.setLineDash([]);
+              }
+              /* -------------------------
+                  LOGGING
+              ---------------------------- */
+              function generatePacketDataAndInfo() {
+                const packetTypes = ['HTTP Request', 'DNS Query', 'TCP Handshake', 'UDP Packet', 'ICMP Ping'];
+                const sources = ['192.168.0.1', '10.0.0.2', '172.16.0.3'];
+                const destinations = ['203.0.113.1', '203.0.113.2', '203.0.113.3'];
+                const ports = [80, 443, 53, 123, 8080];
+                const packetType = packetTypes[Math.floor(Math.random() * packetTypes.length)];
+                const source = sources[Math.floor(Math.random() * sources.length)];
+                const destination = destinations[Math.floor(Math.random() * destinations.length)];
+                const sourcePort = ports[Math.floor(Math.random() * ports.length)];
+                const destinationPort = ports[Math.floor(Math.random() * ports.length)];
+                const packetSize = Math.floor(Math.random() * 1500) + 64;
+                const latency = Math.floor(Math.random() * 100) + 1;
+                return {
+                  packetData: `${packetType} - Size: ${packetSize} bytes, Latency: ${latency} ms`,
+                  additionalInfo: `Source: ${source}
+                      <br>Destination: ${destination}
+                        <br>Source Port: ${sourcePort}
+                          <br>Destination Port: ${destinationPort}
+                            <br>Payload Size: ${packetSize} bytes`
+                };
+              }
+
+              function logTrafficEvent(startNode, endNode) {
+                const logElement = document.getElementById('log');
+                const {
+                  packetData,
+                  additionalInfo
+                } = generatePacketDataAndInfo();
+                const logMessage = `Node ${startNode} -> Node ${endNode}: ${packetData}`;
+                const entry = document.createElement('div');
+                entry.classList.add('tooltip');
+                entry.textContent = logMessage;
+                const tip = document.createElement('span');
+                tip.classList.add('tooltiptext');
+                tip.innerHTML = additionalInfo;
+                entry.appendChild(tip);
+                entry.onmousemove = e => {
+                  tip.style.top = `${e.clientY + 10}px`;
+                  tip.style.left = `${e.clientX + 10}px`;
+                };
+                logElement.appendChild(entry);
+                const consoleElement = document.getElementById('console');
+                consoleElement.scrollTop = consoleElement.scrollHeight;
+              }
+              /* -------------------------
+                  NODE DRAWING
+              ---------------------------- */
+              function drawNodes(ctx, coordinates, target) {
+                if (!nodesVisible) return;
+                const w = ctx.canvas.width;
+                const h = ctx.canvas.height;
+                coordinates.forEach(c => {
+                  const scaled = scaleCoord(c.x, c.y, w, h);
+                  ctx.beginPath();
+                  ctx.arc(scaled.x, scaled.y, 5, 0, 2 * Math.PI, false);
+                  ctx.fillStyle = 'green';
+                  ctx.fill();
+                });
+                const t = scaleCoord(target.x, target.y, w, h);
+                ctx.beginPath();
+                ctx.arc(t.x, t.y, 5, 0, 2 * Math.PI, false);
+                ctx.fillStyle = 'orange';
+                ctx.fill();
+              }
+              /* -------------------------
+                  DDOS SIMULATION
+              ---------------------------- */
+              function startSimulation() {
+                if (trafficIntervalId) clearInterval(trafficIntervalId);
+                trafficVisible = false;
+                const logElement = document.getElementById('log');
+                const msg = document.createElement('div');
+                msg.textContent = "Starting DDoS Simulation...";
+                logElement.appendChild(msg);
+                logElement.scrollTop = logElement.scrollHeight;
+                const map = document.getElementById('map');
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = map.clientWidth;
+                canvas.height = map.clientHeight;
+                animateAllLines(ctx, coordinates, targetNode, 2000);
+              }
+
+              function animateAllLines(ctx, coords, target, duration) {
+                const startTime = performance.now();
+
+                function step(timestamp) {
+                  const w = ctx.canvas.width;
+                  const h = ctx.canvas.height;
+                  const scaledTarget = scaleCoord(target.x, target.y, w, h);
+                  const elapsed = timestamp - startTime;
+                  const progress = Math.min(elapsed / duration, 1);
+                  ctx.clearRect(0, 0, w, h);
+                  drawNodes(ctx, coords, target);
+                  coords.forEach(c => {
+                    const s = scaleCoord(c.x, c.y, w, h);
+                    drawLineSegment(ctx, s.x, s.y, scaledTarget.x, scaledTarget.y, progress);
+                    const startNode = coords.indexOf(c) + 1;
+                    const endNode = coords.indexOf(target) + 1;
+                    logTrafficEvent(startNode, endNode);
+                  });
+                  if (progress < 1) {
+                    animationFrameId = requestAnimationFrame(step);
+                  } else {
+                    drawNodes(ctx, coords, target);
+                    setTimeout(() => animateAllLines(ctx, coords, target, duration), 1000);
+                  }
+                }
+                animationFrameId = requestAnimationFrame(step);
+              }
+              /* -------------------------
+                  RESET / TOGGLE
+              ---------------------------- */
+              function resetSimulation() {
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                cancelAnimationFrame(animationFrameId);
+                if (trafficIntervalId) clearInterval(trafficIntervalId);
+                trafficAnimations = [];
+                drawNodes(ctx, coordinates, targetNode);
+              }
+
+              function toggleNodes() {
+                nodesVisible = !nodesVisible;
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawNodes(ctx, coordinates, targetNode);
+              }
+              /* -------------------------
+                  TRAFFIC SYSTEM (SCALED)
+              ---------------------------- */
+              function drawTrafficLine(ctx, startX, startY, endX, endY, duration) {
+                const startTime = performance.now();
+                trafficAnimations.push({
+                  startX,
+                  startY,
+                  endX,
+                  endY,
+                  startTime,
+                  duration,
+                  complete: false
+                });
+                const startNode = coordinates.findIndex(c => scaleCoord(c.x, c.y, ctx.canvas.width, ctx.canvas.height).x === startX) + 1;
+                const endNode = coordinates.findIndex(c => scaleCoord(c.x, c.y, ctx.canvas.width, ctx.canvas.height).x === endX) + 1;
+                logTrafficEvent(startNode, endNode);
+                if (trafficAnimations.length === 1) requestAnimationFrame(() => drawAllTrafficLines(ctx));
+              }
+
+              function drawAllTrafficLines(ctx) {
+                const w = ctx.canvas.width;
+                const h = ctx.canvas.height;
+                ctx.clearRect(0, 0, w, h);
+                drawNodes(ctx, coordinates, targetNode);
+                trafficAnimations.forEach(a => {
+                  const elapsed = performance.now() - a.startTime;
+                  const progress = Math.min(elapsed / a.duration, 1);
+                  drawLineSegment(ctx, a.startX, a.startY, a.endX, a.endY, progress);
+                  if (progress >= 1) a.complete = true;
+                });
+                trafficAnimations = trafficAnimations.filter(a => !a.complete);
+                if (trafficAnimations.length > 0) requestAnimationFrame(() => drawAllTrafficLines(ctx));
+              }
+
+              function generateRandomTraffic(ctx) {
+                const n1 = coordinates[Math.floor(Math.random() * coordinates.length)];
+                const n2 = coordinates[Math.floor(Math.random() * coordinates.length)];
+                if (n1 === n2) return;
+                const s = scaleCoord(n1.x, n1.y, ctx.canvas.width, ctx.canvas.height);
+                const t = scaleCoord(n2.x, n2.y, ctx.canvas.width, ctx.canvas.height);
+                drawTrafficLine(ctx, s.x, s.y, t.x, t.y, 1000);
+              }
+
+              function toggleNetworkTraffic() {
+                trafficVisible = !trafficVisible;
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                if (trafficVisible) {
+                  trafficIntervalId = setInterval(() => generateRandomTraffic(ctx), 250);
+                } else {
+                  clearInterval(trafficIntervalId);
+                  resetSimulation();
+                }
+              }
+              /* -------------------------
+                  INITIAL SETUP + EVENTS
+              ---------------------------- */
+              function initializeCanvas() {
+                const map = document.getElementById('map');
+                const canvas = document.getElementById('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.width = map.clientWidth;
+                canvas.height = map.clientHeight;
+                drawNodes(ctx, coordinates, targetNode);
+                canvas.addEventListener('click', e => {
+                  const rect = canvas.getBoundingClientRect();
+                  const clickX = e.clientX - rect.left;
+                  const clickY = e.clientY - rect.top;
+                  coordinates.forEach(c => {
+                    const scaled = scaleCoord(c.x, c.y, canvas.width, canvas.height);
+                    if (Math.hypot(scaled.x - clickX, scaled.y - clickY) < 10) {
+                      targetNode = c;
+                      ctx.clearRect(0, 0, canvas.width, canvas.height);
+                      drawNodes(ctx, coordinates, targetNode);
+                    }
+                  });
+                });
+                canvas.addEventListener('mousemove', e => {
+                  const rect = canvas.getBoundingClientRect();
+                  const mouseX = e.clientX - rect.left;
+                  const mouseY = e.clientY - rect.top;
+                  let hit = false;
+                  coordinates.forEach(c => {
+                    const scaled = scaleCoord(c.x, c.y, canvas.width, canvas.height);
+                    if (Math.hypot(scaled.x - mouseX, scaled.y - mouseY) < 10) hit = true;
+                  });
+                  canvas.style.cursor = hit ? "crosshair" : "default";
+                });
+              }
+              window.onresize = initializeCanvas;
+              window.onload = initializeCanvas;
+            </script>
           </div>
         </div>
       </div>
