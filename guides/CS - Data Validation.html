@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head id="head">
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Computing Department | Cisco Networking Academy</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+		<link rel="stylesheet" href="../styles/tooltip.css">
+	</head>
+	<body class="bg-[#0D3B66] font-sans">
+		<div id="header"></div>
+		<div id="imodal"></div>
+		<section class="py-3">
+			<div class="container mx-auto px-4">
+				<div class="bg-white shadow-lg rounded-lg p-6">
+					<h2 class="text-l font-bold mb-4 p-2">
+						<a class="bg-gray-200 p-2 w-40 text-left" href="../index.html">🏠 Return Home</a>
+						<a class="bg-gray-200 p-2">CS - Data Validation</a>
+					</h2>
+					<hr>
+					<br>
+					<nav class="sticky top-0 z-40 bg-white/95 backdrop-blur border-b mb-4">
+						<div class="flex flex-wrap gap-2 p-3">
+							<a href="#chapter-one" data-chapter-link="chapter-one" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Reading</a>
+							<a href="#chapter-two" data-chapter-link="chapter-two" class="chapter-link px-3 py-2 rounded border hover:bg-gray-50">Practice</a>
+						</div>
+					</nav>
+					<!-- Global Step Controls (re-used per chapter) -->
+					<div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+						<div class="inline-flex rounded-lg shadow-sm overflow-hidden border">
+							<button id="viewAllBtn" class="px-4 py-2 text-sm font-medium bg-gray-100 hover:bg-gray-200">All steps</button>
+							<button id="viewSingleBtn" class="px-4 py-2 text-sm font-medium hover:bg-gray-100">One at a time</button>
+						</div>
+						<div id="singleControls" class="hidden items-center gap-2">
+							<span id="stepCounter" class="text-sm text-gray-600 mr-2">Step 1 of 1</span>
+							<button id="prevStep" class="px-3 py-2 text-sm rounded bg-gray-200 hover:bg-gray-300">Previous</button>
+							<button id="nextStep" class="px-3 py-2 text-sm rounded bg-blue-600 text-white hover:bg-blue-700">Next</button>
+						</div>
+					</div>
+					<div id="chapters" class="">
+						<!-- Chapter 1:  -->
+						<section class="chapter" id="chapter-one" data-chapter="chapter-one">
+							<div id="stepsWrapper-chapter-one" class="">
+								<!-- Article Steps Here -->
+								<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="1" aria-expanded="true">
+									<div class="grid grid-cols-1 lg:grid-cols-1 gap-6 items-start">
+										<h3 class="text-xl font-semibold mb-2">Data Validation</h3>
+										<p class="text-gray-700 mb-4">
+											<b>Explanation:</b>
+											<br>Data validation checks that data entered into a system is correct, sensible, and acceptable before the system processes it. It stops invalid, dangerous, or incorrect data from causing errors, corrupting databases, or breaking functionality. This keeps systems accurate, secure, and reliable. <br>
+											<br>
+											<b>Steps:</b>
+											<br>The steps on this guide go through the different types of data validation checks you can find within a code base.
+										</p>
+									</div>
+								</article>
+								<article class="mb-8 border-l-4 border-blue-600 pl-4" data-step="2" aria-expanded="true">
+									<div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+										<div>
+											<h3 class="text-xl font-semibold mb-2">Logging in</h3>
+											<p class="text-gray-700 mb-4">To login to your account, you need to either create an account using your organisational email, or login using the link sent to you by your tutor.
+										</div>
+										<div class="bg-gray-100 border rounded-lg p-3">
+											<img src="../guides/images/turnitin/1.png" alt="">
+										</div>
+									</div>
+								</article>
+							</div>
+						</section>
+						<!-- Chapter 2:  -->
+						<section class="chapter hidden" id="chapter-two" data-chapter="chapter-two">
+							<div id="stepsWrapper-chapter-two" class="">
+								<style>
+									.fontstyling {
+										font-family: Impact, Charcoal, sans-serif;
+										font-size: 31px;
+										letter-spacing: 0px;
+										word-spacing: 2px;
+										color: #000000;
+										font-weight: 400;
+										text-decoration: none;
+										font-style: normal;
+										font-variant: small-caps;
+										text-transform: none;
+									}
+								</style>
+								<hr>
+								<h2 class="fontstyling" style="text-align: center;">Data Validation (Practice)</h2>
+								<iframe src="https://www.101computing.net/quiz/?q=validation" style="width:100%; height:75vh; border:0; margin:0; padding:0; overflow:hidden;" allowfullscreen></iframe>
+								<div class="bg-blue-100 border-l-4 border-blue-500 p-4 rounded">
+									<h4 class="font-bold text-blue-700 mb-1">Support the Original Author</h4>
+									<p class="text-blue-800 text-sm"> Support the author of this practice quiz. <a href="https://www.101computing.net/">101Computing.net</a>
+									</p>
+								</div>
+							</div>
+						</section>
+					</div>
+				</div>
+			</div>
+		</section>
+	</body>
+	<script src="../imports/imodal.js"></script>
+	<!-- Js for the contact/info/turnitinuk buttons -->
+	<script src="../imports/base.js"></script>
+	<!-- Js for the header and modal imports -->
+	<script>
+		(function() {
+			// --- CHAPTER SWITCHING ---
+			const chapterLinks = document.querySelectorAll('[data-chapter-link]');
+			const chapters = Array.from(document.querySelectorAll('.chapter'));
+
+			function setActiveChapter(id, pushHash = true) {
+				chapters.forEach(ch => ch.classList.toggle('hidden', ch.id !== id));
+				chapterLinks.forEach(a => {
+					const active = a.getAttribute('data-chapter-link') === id;
+					a.classList.toggle('bg-blue-50', active);
+					a.classList.toggle('border-blue-500', active);
+					a.classList.toggle('text-blue-700', active);
+				});
+				localStorage.setItem('hypervChapter', id);
+				if (pushHash) location.hash = id;
+				// Scroll to top smoothly when changing chapter
+				window.scrollTo(0, 0);
+				// Re-scope steps to the newly active chapter
+				initStepsForCurrentChapter();
+			}
+			chapterLinks.forEach(a => {
+				a.addEventListener('click', (e) => {
+					// Allow normal anchor behavior but still drive state
+					const id = a.getAttribute('data-chapter-link');
+					setActiveChapter(id);
+				});
+			});
+
+			function getInitialChapter() {
+				const fromHash = location.hash.replace('#', '').trim();
+				if (fromHash && document.getElementById(fromHash)) return fromHash;
+				const saved = localStorage.getItem('hypervChapter');
+				if (saved && document.getElementById(saved)) return saved;
+				return 'chapter-one';
+			}
+			window.addEventListener('hashchange', () => {
+				const id = location.hash.replace('#', '').trim();
+				if (id && document.getElementById(id)) setActiveChapter(id, false);
+			});
+			// --- STEPS (scoped to current chapter) ---
+			const viewAllBtn = document.getElementById('viewAllBtn');
+			const viewSingleBtn = document.getElementById('viewSingleBtn');
+			const singleControls = document.getElementById('singleControls');
+			const stepCounter = document.getElementById('stepCounter');
+			const prevStep = document.getElementById('prevStep');
+			const nextStep = document.getElementById('nextStep');
+			let singleMode = true;
+			let idx = 0;
+			let currentSteps = [];
+
+			function stopMedia(el) {
+				el.querySelectorAll('iframe').forEach(f => f.src = f.src);
+				el.querySelectorAll('video').forEach(v => v.pause());
+			}
+
+			function renderSteps() {
+				const total = currentSteps.length || 0;
+				if (!singleMode) {
+					currentSteps.forEach(s => {
+						s.classList.remove('hidden');
+						s.setAttribute('aria-expanded', 'true');
+					});
+					singleControls.classList.add('hidden');
+					viewAllBtn.classList.add('bg-gray-100');
+					viewSingleBtn.classList.remove('bg-gray-100');
+					return;
+				}
+				currentSteps.forEach((s, i) => {
+					if (i === idx) {
+						s.classList.remove('hidden');
+						s.setAttribute('aria-expanded', 'true');
+					} else {
+						stopMedia(s);
+						s.classList.add('hidden');
+						s.setAttribute('aria-expanded', 'false');
+					}
+				});
+				singleControls.classList.remove('hidden');
+				stepCounter.textContent = `Step ${Math.min(idx+1,total)} of ${total || 1}`;
+				viewAllBtn.classList.remove('bg-gray-100');
+				viewSingleBtn.classList.add('bg-gray-100');
+			}
+
+			function initStepsForCurrentChapter() {
+				const active = document.querySelector('.chapter:not(.hidden)');
+				currentSteps = active ? Array.from(active.querySelectorAll('[data-step]')) : [];
+				idx = 0;
+				renderSteps();
+			}
+			// Controls
+			viewAllBtn.addEventListener('click', () => {
+				singleMode = false;
+				renderSteps();
+			});
+			viewSingleBtn.addEventListener('click', () => {
+				singleMode = true;
+				renderSteps();
+			});
+			prevStep.addEventListener('click', () => {
+				if (!currentSteps.length) return;
+				idx = (idx - 1 + currentSteps.length) % currentSteps.length;
+				renderSteps();
+			});
+			nextStep.addEventListener('click', () => {
+				if (!currentSteps.length) return;
+				idx = (idx + 1) % currentSteps.length;
+				renderSteps();
+			});
+			// INIT
+			setActiveChapter(getInitialChapter(), false);
+		})();
+	</script>
+</html>
